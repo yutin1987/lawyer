@@ -13,11 +13,38 @@
 
     <link href="./bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?language=zh-TW"></script>
+    <script type="text/javascript" src="./bower_components/jquery/dist/jquery.min.js"></script>
+
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    <script type="text/javascript">
+      $(function(){
+        var mapOptions = {
+          zoom: 6
+        };
+
+        if(navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+            function(position) {
+              console.log(position);
+              var x = position.coords.latitude;
+              var y = position.coords.longitude;
+              $('#map').attr(
+                'src',
+                'http://maps.googleapis.com/maps/api/staticmap?center='+x+','+y+'&zoom=13&size=320x320&maptype=roadmap&sensor=false'
+              );
+            }, function() {
+            }
+          );
+        } else {
+        }
+      });
+    </script>
 
     <style type="text/css">
       .btn-type {
@@ -43,23 +70,24 @@
         <form role="form">
           <div class="form-group">
             <label for="exampleInputEmail1">姓名：</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+            <input type="text" class="form-control" placeholder="name">
           </div>
           <div class="form-group">
             <label for="exampleInputPassword1">行動電話：</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+            <input type="text" class="form-control" placeholder="mobile">
           </div>
           <div class="form-group">
-            <label for="exampleInputFile">大略位置：</label>
-            其他位置
-            <img src="http://maps.googleapis.com/maps/api/staticmap?center=Taiwan&zoom=13&size=300x300&maptype=roadmap&sensor=false">
+            <div>
+              <label for="exampleInputFile">大略位置：</label>
+            </div>
+            <div>
+              <img id="map" src="http://maps.googleapis.com/maps/api/staticmap?center=Taiwan&zoom=6&size=300x300&maptype=roadmap&sensor=false">
+            </div>
+            <div>
+              選擇其他位置
+            </div>
           </div>
-          <div class="checkbox">
-            <label>
-              <input type="checkbox"> Check me out
-            </label>
-          </div>
-          <button type="submit" class="btn btn-default">Submit</button>
+          <button type="submit" class="btn btn-default">呼叫律師</button>
         </form>
       </div>
 
