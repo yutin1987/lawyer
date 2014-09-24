@@ -76,7 +76,7 @@ angular.module('starter', ['ionic'])
         }
 
         $scope.changeCity = function(){
-          console.log($scope.city);
+          alert($scope.city);
         }
 
         if(navigator.geolocation) {
