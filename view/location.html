@@ -1,0 +1,44 @@
+<ion-pane>
+  <ion-header-bar class="bar-stable">
+    <h1 class="title">呼叫律師</h1>
+  </ion-header-bar>
+  <ion-content class="padding">
+  <div class="list card">
+
+    <div class="item">
+      <h2>目前所在警察局：{{police.name}}</h2>
+    </div>
+
+    <div class="item item-image">
+      <img src="{{map}}">
+    </div>
+
+    <label class="item item-input item-select">
+      <div class="input-label">
+        縣市：
+      </div>
+      <select ng-model="city" ng-options="item.name for item in citys">
+      </select>
+    </label>
+
+    <label class="item item-input item-select">
+      <div class="input-label">
+        警察局：
+      </div>
+      <select ng-model="police" ng-options="item.name group by item.unit for item in polices">
+      </select>
+    </label>
+
+    <a class="item item-icon-left assertive" ng-click="other()">
+      <i class="icon ion-location"></i>
+      選擇其他警局
+    </a>
+
+  </div>
+  
+  <button ui-sref="location" class="button button-block button-positive icon-right ion-chevron-right">
+      下一步
+  </button>
+
+  </ion-content>
+</ion-pane>
