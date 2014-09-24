@@ -32,7 +32,12 @@ angular.module('starter', ['ionic'])
       templateUrl: "view/location.html",
       controller: function($scope) {
 
-        $scope.citys = {
+        $scope.select = {
+          city: 'taipei',
+          police: {}
+        }
+
+        $scope.city = {
           'taipei': '台北',
           'changhua': '彰化',
           'chupei': '新竹',
@@ -52,8 +57,8 @@ angular.module('starter', ['ionic'])
           'yilan': '宜蘭'
         };
 
-        $scope.polices = [
-          {name: '尚未定位', unit: '附近局所'}
+        $scope.police = [
+          {name: '尚未定位', unit: '警察局'}
         ];
 
         $scope.lat = 0;
@@ -62,21 +67,29 @@ angular.module('starter', ['ionic'])
         var getPolice = function (cb) {
           var lat = $scope.lat;
           var lng = $scope.lng;
-          $.get('./data/' + $scope.city + '.json', function (res) {
+          $.get('./data/' + $scope.select.city + '.json', function (res) {
             res.sort( function(a, b) {
               var va = Math.abs(a.location.lat - lat) + Math.abs(a.location.lng - lng);
               var vb = Math.abs(b.location.lat - lat) + Math.abs(b.location.lng - lng);
               return va - vb;
               }
             );
-            if (cb) {
-              cb(null, res);
+
+            $scope.select.police = res[0];
+            $scope.map = 'http://maps.googleapis.com/maps/api/staticmap?center='+res[0].location.lat+','+res[0].location.lng+'&language=zh-TW&zoom=16&size=640x640&maptype=roadmap&sensor=false';
+            for (var i = 0; i < 5; i++) {
+              res[i].unit = '附近局所';
             }
+            for (var i = 5; i < res.length; i++) {
+              res[i].unit = '警察局';
+            }
+            $scope.police = res;
+            $scope.$apply();
           });
         }
 
-        $scope.changeCity = function(){
-          alert($scope.city);
+        $scope.changeCity = function () {
+          getPolice();
         }
 
         if(navigator.geolocation) {
@@ -89,19 +102,8 @@ angular.module('starter', ['ionic'])
                 var result = res.results;
                 var city = / *([\w]+) *city/gi.exec(result[0]['formatted_address']);
                 if (city) {
-                  $scope.city = city[1].toLowerCase();
-                  getPolice( function(err, res) {
-                    $scope.police = res[0];
-                    $scope.map = 'http://maps.googleapis.com/maps/api/staticmap?center='+res[0].location.lat+','+res[0].location.lng+'&language=zh-TW&zoom=16&size=640x640&maptype=roadmap&sensor=false';
-                    for (var i = 0; i < 5; i++) {
-                      res[i].unit = '附近局所';
-                    }
-                    for (var i = 5; i < res.length; i++) {
-                      res[i].unit = '警察局';
-                    }
-                    $scope.polices = res;
-                    $scope.$apply();
-                  });
+                  $scope.select.city = city[1].toLowerCase();
+                  getPolice();
                 }
               });
             }, function() {
