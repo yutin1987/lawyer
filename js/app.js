@@ -32,29 +32,32 @@ angular.module('starter', ['ionic'])
       templateUrl: "view/location.html",
       controller: function($scope) {
 
-        $scope.citys = [
-          {name: '台北', value: 'taipei'},
-          {name: '彰化', value: 'changhua'},
-          {name: '新竹', value: 'chupei'},
-          {name: '雲林', value: 'douliu'},
-          {name: '花蓮', value: 'hualien'},
-          {name: '高雄', value: 'kaohsiung'},
-          {name: '基隆', value: 'keelung'},
-          {name: '澎湖', value: 'magong'},
-          {name: '苗栗', value: 'miaoli'},
-          {name: '南投', value: 'nantou'},
-          {name: '屏東', value: 'pingtung'},
-          {name: '嘉義', value: 'taibao'},
-          {name: '台中', value: 'taichung'},
-          {name: '台南', value: 'tainan'},
-          {name: '台東', value: 'taitung'},
-          {name: '桃園', value: 'taoyuan'},
-          {name: '宜蘭', value: 'yilan'},
-        ];
+        $scope.citys = {
+          'taipei': '台北',
+          'changhua': '彰化',
+          'chupei': '新竹',
+          'douliu': '雲林',
+          'hualien': '花蓮',
+          'kaohsiung': '高雄',
+          'keelung': '基隆',
+          'magong': '澎湖',
+          'miaoli': '苗栗',
+          'nantou': '南投',
+          'pingtung': '屏東',
+          'taibao': '嘉義',
+          'taichung': '台中',
+          'tainan': '台南',
+          'taitung': '台東',
+          'taoyuan': '桃園',
+          'yilan': '宜蘭'
+        };
 
         $scope.polices = [
           {name: '尚未定位', unit: '附近局所'}
         ];
+
+        $scope.lat = 0;
+        $scope.lng = 0;
 
         var getPolice = function (cb) {
           var lat = $scope.lat;
@@ -70,6 +73,10 @@ angular.module('starter', ['ionic'])
               cb(null, res);
             }
           });
+        }
+
+        $scope.changeCity = function(){
+          console.log($scope.city);
         }
 
         if(navigator.geolocation) {
