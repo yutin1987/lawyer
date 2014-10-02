@@ -1,6 +1,6 @@
 <ion-pane>
   <ion-header-bar class="bar-stable">
-    <h1 class="title">呼叫律師</h1>
+    <img class="logo_mini" src="./img/logo_mini.png" />
   </ion-header-bar>
   <ion-content>
   <div class="list">
@@ -25,7 +25,7 @@
       <div class="input-label">
         警察局：
       </div>
-      <select ng-model="select.police" ng-options="item.name group by item.unit for item in police">
+      <select ng-model="select.police" ng-change="changePolice()" ng-options="item.name group by item.unit for item in police">
       </select>
     </label>
 

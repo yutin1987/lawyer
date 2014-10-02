@@ -64,7 +64,7 @@ angular.module('starter', ['ionic'])
         $scope.lat = 0;
         $scope.lng = 0;
 
-        var getPolice = function (cb) {
+        var getPolice = function (police) {
           var lat = $scope.lat;
           var lng = $scope.lng;
           $.get('./data/' + $scope.select.city + '.json', function (res) {
@@ -75,8 +75,21 @@ angular.module('starter', ['ionic'])
               }
             );
 
-            $scope.select.police = res[0];
-            $scope.map = 'http://maps.googleapis.com/maps/api/staticmap?center='+res[0].location.lat+','+res[0].location.lng+'&language=zh-TW&zoom=16&size=640x640&maptype=roadmap&sensor=false';
+            $scope.select.police = null;
+
+            if (police) {
+              for (var i = res.length - 1; i >= 0; i--) {
+                if (police.name === res[i].name) {
+                  $scope.select.police = res[i];
+                }
+              };
+            }
+            
+            if (!$scope.select.police) {
+              $scope.select.police = res[0];
+            }
+
+            $scope.map = 'http://maps.googleapis.com/maps/api/staticmap?center='+$scope.select.police.location.lat+','+$scope.select.police.location.lng+'&language=zh-TW&zoom=16&size=640x640&maptype=roadmap&sensor=false';
             for (var i = 0; i < 5; i++) {
               res[i].unit = '附近局所';
             }
@@ -90,6 +103,10 @@ angular.module('starter', ['ionic'])
 
         $scope.changeCity = function () {
           getPolice();
+        }
+
+        $scope.changePolice = function () {
+          getPolice($scope.select.police);
         }
 
         if(navigator.geolocation) {
