@@ -107,7 +107,7 @@ angular.module('starter', ['ionic'])
                 }
               });
             }, function() {
-
+              alert('Failed');
             }
           );
         } else {
