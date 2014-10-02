@@ -84,7 +84,7 @@ angular.module('starter', ['ionic'])
                 }
               };
             }
-            
+
             if (!$scope.select.police) {
               $scope.select.police = res[0];
             }
@@ -124,11 +124,11 @@ angular.module('starter', ['ionic'])
                 }
               });
             }, function() {
-              alert('Failed');
+              alert('Failed!');
             }
           );
         } else {
-
+          alert('No geolocation!');
         }
 
         $scope.other = function () {
