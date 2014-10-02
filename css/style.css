@@ -1,1 +1,9 @@
-/* Empty. Add your own CSS if you like */
+body {
+	background: #BAD7F0;
+	background-image: url('../img/background.jpg');
+	background-size: 100%;
+}
+
+.pane, .view {
+	background-color: inherit;
+}

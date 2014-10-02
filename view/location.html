@@ -2,8 +2,8 @@
   <ion-header-bar class="bar-stable">
     <h1 class="title">呼叫律師</h1>
   </ion-header-bar>
-  <ion-content class="padding">
-  <div class="list card">
+  <ion-content>
+  <div class="list">
 
     <div class="item">
       <h2>目前所在警察局：{{select.police.name}}</h2>
@@ -31,9 +31,11 @@
 
   </div>
   
-  <button ui-sref="location" class="button button-block button-positive icon-right ion-chevron-right">
-      下一步
-  </button>
+  <div class="padding">
+    <button ui-sref="location" class="button button-block button-positive icon-right ion-chevron-right">
+        下一步
+    </button>
+  </div>
 
   </ion-content>
 </ion-pane>
