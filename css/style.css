@@ -57,7 +57,8 @@ body {
 	border: none;
 }
 
-.lawyer .btn-form {
+.lawyer .btn-form ,
+.lawyer .btn-pay {
 	background: #DCDCDD;
 	color: #221814;
 	max-width: 139px;
@@ -80,4 +81,48 @@ body {
 	padding-bottom: 7px;
 	margin-left: 8px;
 	margin-right: 8px;
+}
+
+.pay-list {
+	color: #595757;
+}
+
+.pay-list .item {
+	border: none;
+}
+
+.pay-list .wrap {
+	width: 100%;
+	max-width: 320px;
+	margin: 0 auto;
+}
+
+.pay-list .info span{
+	display: block;
+}
+
+.pay-list .time {
+	color: #FFF;
+}
+
+.pay-list .time .now{
+	font-size: 46pt;
+	line-height: 46pt;
+}
+
+.pay-list .time span{
+	font-size: 15pt;
+	vertical-align: top;
+}
+
+.pay-list .time .wrap {
+	background: url('../img/pay.png');
+	background-size: 100%;
+	padding: 3px 8px;
+}
+
+.pay-list .amount {
+	font-size: 85px;
+	color: #717071;
+	display: block;
 }

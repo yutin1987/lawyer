@@ -142,7 +142,12 @@ angular.module('starter', ['ionic'])
       url: "/form",
       templateUrl: "view/form.html",
       controller: function($scope) {
-
+      }
+    })
+    .state('pay', {
+      url: "/pay",
+      templateUrl: "view/pay.html",
+      controller: function($scope) {
       }
     });
 });

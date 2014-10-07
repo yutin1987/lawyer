@@ -1,0 +1,48 @@
+<ion-pane>
+  <ion-header-bar class="bar-stable">
+    <img class="logo_mini" src="./img/logo_mini.png" />
+  </ion-header-bar>
+  <ion-content>
+  <div class="list pay-list">
+    <div class="item" ng-click="select.show=true">
+      <div class="wrap">
+        <h2>付款資訊</h2>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="wrap">
+        <span>本服務以小時計費，收費標準參考<a>費用說明</a></span>
+      </div>
+    </div>
+
+    <div class="item info">
+      <div class="wrap">
+        <span>時段：18:00~24:00</span>
+        <span>價格：NT5000/每小時</span>
+      </div>
+    </div>
+
+    <div class="item time">
+      <div class="wrap">
+        <span>現在時刻</span>
+        <span class="now">11:00</span>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="wrap">
+        <span>預付兩小時訂金</span>
+        <label class="amount">$10000</label>
+      </div>
+    </div>
+
+    <label class="item padding">
+      <button ui-sref="pay" class="button button-block btn-pay">
+          確定
+      </button>
+    </label>
+  </div>
+  
+  </ion-content>
+</ion-pane>
