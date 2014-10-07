@@ -5,7 +5,7 @@
   <ion-content>
   <div class="list">
 
-    <div class="item">
+    <div class="item" ng-click="select.show=true">
       <h2>目前所在警察局：{{select.police.name}}</h2>
     </div>
 
@@ -13,7 +13,7 @@
       <img src="{{map}}">
     </div>
 
-    <label class="item item-input item-select">
+    <label class="item item-input item-select" ng-show="select.show">
       <div class="input-label">
         縣市：
       </div>
@@ -21,7 +21,7 @@
       </select>
     </label>
 
-    <label class="item item-input item-select">
+    <label class="item item-input item-select" ng-show="select.show">
       <div class="input-label">
         警察局：
       </div>
@@ -32,7 +32,7 @@
   </div>
   
   <div class="padding">
-    <button ui-sref="location" class="button button-block icon-right ion-chevron-right">
+    <button ui-sref="form" class="button button-block icon-right ion-chevron-right">
         下一步
     </button>
   </div>

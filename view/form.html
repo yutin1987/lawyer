@@ -1,0 +1,54 @@
+<ion-pane>
+  <ion-header-bar class="bar-stable">
+    <img class="logo_mini" src="./img/logo_mini.png" />
+  </ion-header-bar>
+  <ion-content>
+  <div class="list">
+    <label class="item item-stacked-label">
+      <h2>請先填上你的基本資料</h2>
+      <br />
+      <span class="input-label">姓名：</span>
+      <input type="text" class="form_input">
+      <span class="input-label">手機：</span>
+      <input type="text" class="form_input">
+    </label>
+
+    <div class="list card">
+      <label class="item item-input">
+        <span class="input-label">案件類型：</span>
+      </label>
+
+      <label class="item item-radio">
+        <input type="radio" name="group">
+        <div class="item-content">
+          毒品
+        </div>
+        <i class="radio-icon ion-checkmark"></i>
+      </label>
+
+      <label class="item item-radio">
+        <input type="radio" name="group">
+        <div class="item-content">
+          交通
+        </div>
+        <i class="radio-icon ion-checkmark"></i>
+      </label>
+
+      <label class="item item-radio">
+        <input type="radio" name="group">
+        <div class="item-content">
+          其他
+        </div>
+        <i class="radio-icon ion-checkmark"></i>
+      </label>
+    </div>
+  </div>
+  
+  <div class="padding">
+    <button ui-sref="form" class="button button-block btn-form">
+        下一步
+    </button>
+  </div>
+
+  </ion-content>
+</ion-pane>

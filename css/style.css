@@ -52,3 +52,13 @@ body {
 .pane, .view {
 	background-color: inherit;
 }
+
+.lawyer .btn-form {
+	background: #EEEFEF;
+	color: #221814;
+}
+
+.lawyer .form_input {
+	background: #DCDCDD;
+	padding: 0 10px;
+}

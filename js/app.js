@@ -34,8 +34,9 @@ angular.module('starter', ['ionic'])
 
         $scope.select = {
           city: 'taipei',
-          police: {}
-        }
+          police: {},
+          show: false
+        };
 
         $scope.city = {
           'taipei': '台北',
@@ -97,17 +98,18 @@ angular.module('starter', ['ionic'])
               res[i].unit = '警察局';
             }
             $scope.police = res;
+            $scope.select.show = false;
             $scope.$apply();
           });
-        }
+        };
 
         $scope.changeCity = function () {
           getPolice();
-        }
+        };
 
         $scope.changePolice = function () {
           getPolice($scope.select.police);
-        }
+        };
 
         if(navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(
@@ -133,7 +135,13 @@ angular.module('starter', ['ionic'])
 
         $scope.other = function () {
           $('#city').click();
-        }
+        };
+      }
+    })
+    .state('form', {
+      url: "/form",
+      templateUrl: "view/form.html",
+      controller: function($scope) {
 
       }
     });
