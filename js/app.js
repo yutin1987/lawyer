@@ -149,5 +149,11 @@ angular.module('starter', ['ionic'])
       templateUrl: "view/pay.html",
       controller: function($scope) {
       }
+    })
+    .state('asign', {
+      url: "/asign",
+      templateUrl: "view/asign.html",
+      controller: function($scope) {
+      }
     });
 });

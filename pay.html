@@ -11,8 +11,6 @@
 
     <title>呼叫律師</title>
 
-    <link href="./bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-
     <script type="text/javascript" src="./bower_components/jquery/dist/jquery.min.js"></script>
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -22,49 +20,132 @@
     <![endif]-->
 
     <script type="text/javascript">
-      $(function(){
+      $(document).ready(function(){
+        var $pc = $('#progressController');
+        var $pCaption = $('.progress-bar p');
+        var iProgress = document.getElementById('inactiveProgress');
+        var aProgress = document.getElementById('activeProgress');
+        var iProgressCTX = iProgress.getContext('2d');
+
+        
+        drawInactive(iProgressCTX);
+        
+        $pc.on('change', function(){
+          var percentage = $(this).val() / 100;
+          console.log(percentage + '%');
+          drawProgress(aProgress, percentage, $pCaption);
+        });
+
+        function drawInactive(iProgressCTX){
+          iProgressCTX.lineCap = 'square';
+
+          //outer ring
+          iProgressCTX.beginPath();
+          iProgressCTX.lineWidth = 15;
+          iProgressCTX.strokeStyle = '#e1e1e1';
+          iProgressCTX.arc(137.5,137.5,129,0,2*Math.PI);
+          iProgressCTX.stroke();
+
+          //progress bar
+          iProgressCTX.beginPath();
+          iProgressCTX.lineWidth = 0;
+          iProgressCTX.fillStyle = '#e6e6e6';
+          iProgressCTX.arc(137.5,137.5,121,0,2*Math.PI);
+          iProgressCTX.fill();
+
+          //progressbar caption
+          iProgressCTX.beginPath();
+          iProgressCTX.lineWidth = 0;
+          iProgressCTX.fillStyle = '#fff';
+          iProgressCTX.arc(137.5,137.5,100,0,2*Math.PI);
+          iProgressCTX.fill();
+
+        }
+        function drawProgress(bar, percentage, $pCaption){
+          var barCTX = bar.getContext("2d");
+          var quarterTurn = Math.PI / 2;
+          var endingAngle = ((2*percentage) * Math.PI) - quarterTurn;
+          var startingAngle = 0 - quarterTurn;
+
+          bar.width = bar.width;
+          barCTX.lineCap = 'square';
+
+          barCTX.beginPath();
+          barCTX.lineWidth = 20;
+          barCTX.strokeStyle = '#76e1e5';
+          barCTX.arc(137.5,137.5,111,startingAngle, endingAngle);
+          barCTX.stroke();
+
+          $pCaption.text( (parseInt(percentage * 100, 10)) + '%');
+        }
+
+          var percentage = $pc.val() / 100;
+          drawProgress(aProgress, percentage, $pCaption);
       });
     </script>
 
     <style type="text/css">
-      .btn-type {
-        text-align: center;
-        padding: 8px 0 8px 0;
+      @import url(http://fonts.googleapis.com/css?family=Lato:700);
+      html,body{
+        height: 100%;
+        width: 100%;
       }
-      .btn-type-icon {
-        width: 140px;
-        height: 140px;
-        margin: 0 auto;
+      html,
+      button,
+      input,
+      select,
+      textarea {
+        color: #5e5e5e;
+        -webkit-font-smoothing: antialiased;
+      }
+      body {
+        background-color: #f0f1f1;
+        font: 14px/24px Lato, Helvetica, Helvetica Neue, Arial;
+        line-height: 1.4;
+      }
+      #page{
+      width: 275px;
+      margin: 20px auto;
+      }
+      .progress-bar{
+        display: inline-block;
+        width: 275px;
+        height: 275px;
+        margin: 7px;
+        padding: 0;
+      }
+      .progress-bar .progress-active{
+        position: relative;
+        top: -279px;
+      }
+      .progress-bar p{
+        font: 14px/24px Lato, Helvetica, Helvetica Neue, Arial;
+        position: relative;
+        margin: 0;
+        padding: 0;
+        width: 275px;
+        top: -460px;
+        font-size: 54px;
+        font-weight: 900;
+        text-align: center;
+      }
+      #progressControllerContainer{
+        position: absolute;
+        bottom: 0px;
+        padding: 10px 80px;
       }
     </style>
   </head>
 
   <body>
-
-    <div class="container">
-      <div class="header">
-        <h3 class="text-muted">呼叫律師</h3>
+    <div id="page">
+      <div class="progress-bar">
+          <canvas id="inactiveProgress" class="progress-inactive" height="275px" width="275px"></canvas>
+        <canvas id="activeProgress" class="progress-active"  height="275px" width="275px"></canvas>
+        <p>0%</p>
       </div>
-
-      <div class="container">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">付費資訊：</h3>
-          </div>
-          <div class="panel-body">
-            <h1>
-              <span class="label label-warning">6000</span>
-            </h1>
-            <span>/每小時</span>
-          </div>
-        </div>
-        <a href="./wait.html" class="btn btn-default btn-lg">
-          <span class="glyphicon glyphicon-star"></span> 開始呼叫
-        </a>
-      </div>
-
-      <div class="footer">
-        <p>&copy; Company 2014</p>
+      <div id="progressControllerContainer">
+        <input type="range" id="progressController" min="0" max="100" value="15" />
       </div>
     </div>
   </body>
