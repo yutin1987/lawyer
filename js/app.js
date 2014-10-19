@@ -153,6 +153,22 @@ angular.module('starter', ['ionic'])
     .state('asign', {
       url: "/asign",
       templateUrl: "view/asign.html",
+      controller: function($scope, $timeout, $state) {
+        $scope.sec = 120;
+        var label;
+        (label = function () {
+          $scope.sec -= 1;
+          if ($scope.sec > 0) {
+            $timeout(label, 1000);
+          } else {
+            $state.go('contact');
+          }
+        })();
+      }
+    })
+    .state('contact', {
+      url: "/contact",
+      templateUrl: "view/contact.html",
       controller: function($scope) {
       }
     });

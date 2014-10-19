@@ -147,7 +147,7 @@ svg.progress path {
 	/*transition: stroke-dashoffset 0.3s;*/
   stroke-dasharray: 628.31852px;
   animation: percent 10s infinite linear;
-  -webkit-animation: percent 190s infinite linear;
+  -webkit-animation: percent 120s infinite linear;
 }
 
 .loading {
@@ -189,6 +189,12 @@ svg.progress path {
   line-height: 54px;
   font-weight: 900;
   text-align: center;
+}
+
+.tip {
+  text-align: center;
+  position: relative;
+  top: -10px
 }
 
 @-webkit-keyframes rotate {
