@@ -38,25 +38,25 @@ angular.module('starter', ['ionic'])
           show: false
         };
 
-        $scope.city = {
-          'taipei': '台北',
-          'changhua': '彰化',
-          'hsinchu': '新竹',
-          'yunlin': '雲林',
-          'hualien': '花蓮',
-          'kaohsiung': '高雄',
-          'keelung': '基隆',
-          'penghu': '澎湖',
-          'miaoli': '苗栗',
-          'nantou': '南投',
-          'pingtung': '屏東',
-          'chiayi': '嘉義',
-          'taichung': '台中',
-          'tainan': '台南',
-          'taitung': '台東',
-          'taoyuan': '桃園',
-          'yilan': '宜蘭'
-        };
+        $scope.city = [
+          {id: 'keelung', name: '基隆'},
+          {id: 'taipei', name: '台北'},
+          {id: 'taoyuan', name: '桃園'},
+          {id: 'hsinchu', name: '新竹'},
+          {id: 'miaoli', name: '苗栗'},
+          {id: 'taichung', name: '台中'},
+          {id: 'changhua', name: '彰化'},
+          {id: 'yunlin', name: '雲林'},
+          {id: 'chiayi', name: '嘉義'},
+          {id: 'tainan', name: '台南'},
+          {id: 'kaohsiung', name: '高雄'},
+          {id: 'pingtung', name: '屏東'},
+          {id: 'yilan', name: '宜蘭'},
+          {id: 'hualien', name: '花蓮'},
+          {id: 'taitung', name: '台東'},
+          {id: 'nantou', name: '南投'},
+          {id: 'penghu', name: '澎湖'},
+        ];
 
         $scope.police = [
           {name: '尚未定位', unit: '警察局'}
