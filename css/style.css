@@ -232,3 +232,35 @@ svg.progress path {
     stroke-dashoffset: 0px;
   }
 }
+
+.button-tel {
+  width: 100%;
+  display: block;
+  text-align: center;
+  background: rgba(254, 254, 254, 0.3);
+  padding: 20px 0 28px 0;
+  text-decoration: none;
+}
+
+.number {
+  font-size: 42px;
+  color: #FEFEFE;
+  text-decoration: none;
+  display: block;
+  padding: 0 0 24px 0;
+}
+
+.lawyer {
+  text-align: center;
+  color: #FEFEFE;
+}
+
+.lawyer .photo{
+  margin-top: 78px;
+  width: 89px;
+}
+
+.lawyer h2 {
+  color: #FEFEFE;
+  font-size: 32px;
+}
