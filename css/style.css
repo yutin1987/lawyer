@@ -250,17 +250,17 @@ svg.progress path {
   padding: 0 0 24px 0;
 }
 
-.lawyer {
+.photo {
   text-align: center;
   color: #FEFEFE;
 }
 
-.lawyer .photo{
+.photo img{
   margin-top: 78px;
   width: 89px;
 }
 
-.lawyer h2 {
+.photo h2 {
   color: #FEFEFE;
   font-size: 32px;
 }
