@@ -139,7 +139,12 @@ angular.module('starter', ['ionic'])
     .state('form', {
       url: "/form",
       templateUrl: "view/form.html",
-      controller: function($scope) {
+      controller: function($scope, $state) {
+        $scope.submit = function(){
+          $('#input-name').blur();
+          $('#input-phone').blur();
+          $state.go('pay');
+        }
       }
     })
     .state('pay', {

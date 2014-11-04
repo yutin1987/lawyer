@@ -10,12 +10,12 @@
 
     <label class="item item-stacked-label">
       <span class="input-label">姓名：</span>
-      <input type="text" class="form_input">
+      <input type="text" id="input-name" class="form_input">
     </label>
 
     <label class="item item-stacked-label input-phone">
       <span class="input-label">手機：</span>
-      <input type="number" class="form_input">
+      <input type="number" id="input-phone" class="form_input">
     </label>
 
     <label class="item">
@@ -47,7 +47,7 @@
     </label>
 
     <label class="item padding">
-      <button ui-sref="pay" class="button button-block btn-form">
+      <button ng-click="submit()" class="button button-block btn-form">
           下一步
       </button>
     </label>
