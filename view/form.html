@@ -18,32 +18,12 @@
       <input type="number" id="input-phone" class="form_input">
     </label>
 
-    <label class="item">
-      <span class="input-label">案件類型：</span>
-    </label>
-
-    <label class="item item-radio padding">
-      <input type="radio" name="group">
-      <div class="item-content">
-        毒品
+    <label class="item item-input item-select">
+      <div class="input-label">
+        案件類型：
       </div>
-      <i class="radio-icon ion-checkmark"></i>
-    </label>
-
-    <label class="item item-radio padding">
-      <input type="radio" name="group">
-      <div class="item-content">
-        交通
-      </div>
-      <i class="radio-icon ion-checkmark"></i>
-    </label>
-
-    <label class="item item-radio padding">
-      <input type="radio" name="group">
-      <div class="item-content">
-        其他
-      </div>
-      <i class="radio-icon ion-checkmark"></i>
+      <select ng-model="type" ng-options="item for item in types">
+      </select>
     </label>
 
     <label class="item padding">

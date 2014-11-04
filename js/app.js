@@ -140,6 +140,14 @@ angular.module('starter', ['ionic'])
       url: "/form",
       templateUrl: "view/form.html",
       controller: function($scope, $state) {
+        $scope.type = '其他';
+
+        $scope.types = [
+          '毒品',
+          '交通',
+          '其他'
+        ];
+
         $scope.submit = function(){
           $('#input-name').blur();
           $('#input-phone').blur();
