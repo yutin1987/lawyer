@@ -34,8 +34,7 @@ angular.module('starter', ['ionic'])
 
         $scope.select = {
           city: 'taipei',
-          police: {},
-          show: false
+          police: {}
         };
 
         $scope.city = [
@@ -98,7 +97,6 @@ angular.module('starter', ['ionic'])
               res[i].unit = '警察局';
             }
             $scope.police = res;
-            $scope.select.show = false;
             $scope.$apply();
           });
         };
