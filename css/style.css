@@ -268,3 +268,13 @@ svg.progress path {
 .input-phone {
   padding-top: 0;
 }
+
+.map {
+  position: relative;
+}
+
+.landmark {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+}
