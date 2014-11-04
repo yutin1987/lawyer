@@ -264,3 +264,7 @@ svg.progress path {
   color: #FEFEFE;
   font-size: 32px;
 }
+
+.item-stacked-label {
+  margin-top: 0;
+}
