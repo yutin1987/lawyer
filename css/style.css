@@ -277,4 +277,7 @@ svg.progress path {
   position: absolute;
   left: 50%;
   top: 50%;
+  width: 42.5px;
+  margin-top: -62px;
+  margin-left: -21.25px;
 }
