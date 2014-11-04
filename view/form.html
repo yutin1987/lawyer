@@ -6,11 +6,14 @@
   <div class="list form-list">
     <label class="item item-stacked-label">
       <h2>請先填上你的基本資料</h2>
-      <br />
-      <span class="input-label">姓名：</span>
-      <input type="text" class="form_input">
-      <span class="input-label">手機：</span>
-      <input type="number" class="form_input">
+      <div>
+        <span class="input-label">姓名：</span>
+        <input type="text" class="form_input">
+      </div>
+      <div>
+        <span class="input-label">手機：</span>
+        <input type="number" class="form_input">
+      </div>
     </label>
 
     <label class="item item-input">
@@ -42,9 +45,9 @@
     </label>
 
     <label class="item padding">
-      <button ui-sref="pay" class="button button-block btn-form">
+      <a ui-sref="pay" class="button button-block btn-form">
           下一步
-      </button>
+      </a>
     </label>
   </div>
   </ion-content>
