@@ -150,14 +150,12 @@ angular.module('starter', ['ionic'])
         $scope.submit = function(){
           var field = document.createElement('input');
           field.setAttribute('type', 'text');
-          field.setAttribute('readonly', 'readonly');
-          field.setAttribute('disabled', 'true');
           document.body.appendChild(field);
 
           setTimeout(function() {
-              field.focus();
+              field.setAttribute('style', 'display:none;');
               setTimeout(function() {
-                  field.setAttribute('style', 'display:none;');
+                  field.focus();
                   $state.go('pay');
               }, 50);
           }, 50);
