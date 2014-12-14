@@ -99,28 +99,21 @@ body {
 	margin: 0 auto;
 }
 
-.pay-list .info span{
-	display: block;
+.period .wrap {
+  padding: 16px 0 16px 0;
 }
 
-.pay-list .time {
-	color: #FFF;
+.period .time-start {
+  
 }
 
-.pay-list .time .now{
-	font-size: 46pt;
-	line-height: 46pt;
+.period .time-end {
+  
 }
 
-.pay-list .time span{
-	font-size: 15pt;
-	vertical-align: top;
-}
-
-.pay-list .time .wrap {
+.period.period-highlight .wrap {
 	background: url('../img/pay.png');
 	background-size: 100%;
-	padding: 3px 8px;
 }
 
 .pay-list .amount {

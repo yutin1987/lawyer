@@ -1,14 +1,8 @@
-// Ionic Starter App
-
-// angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
-// the 2nd parameter is an array of 'requires'
 angular.module('starter', ['ionic'])
 
 .run(function($ionicPlatform) {
+
   $ionicPlatform.ready(function() {
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-    // for form inputs)
     if(window.cordova && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
     }
@@ -16,6 +10,9 @@ angular.module('starter', ['ionic'])
       StatusBar.styleDefault();
     }
   });
+
+  blur
+
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
@@ -27,6 +24,7 @@ angular.module('starter', ['ionic'])
       url: "/home",
       templateUrl: "view/home.html"
     })
+
     .state('location', {
       url: "/location",
       templateUrl: "view/location.html",
@@ -136,6 +134,7 @@ angular.module('starter', ['ionic'])
         };
       }
     })
+
     .state('form', {
       url: "/form",
       templateUrl: "view/form.html",
@@ -155,12 +154,16 @@ angular.module('starter', ['ionic'])
         }
       }
     })
+
     .state('pay', {
       url: "/pay",
       templateUrl: "view/pay.html",
       controller: function($scope) {
+        $("#input-name").blur();
+        $("#input-phone").blur();
       }
     })
+
     .state('asign', {
       url: "/asign",
       templateUrl: "view/asign.html",
@@ -177,6 +180,7 @@ angular.module('starter', ['ionic'])
         })();
       }
     })
+
     .state('contact', {
       url: "/contact",
       templateUrl: "view/contact.html",
