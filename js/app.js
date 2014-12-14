@@ -148,17 +148,9 @@ angular.module('starter', ['ionic'])
         ];
 
         $scope.submit = function(){
-          var field = document.createElement('input');
-          field.setAttribute('type', 'text');
-          document.body.appendChild(field);
-
           setTimeout(function() {
-              field.setAttribute('style', 'display:none;');
-              setTimeout(function() {
-                  field.focus();
-                  $state.go('pay');
-              }, 50);
-          }, 50);
+            $state.go('pay');
+          }, 500);
         }
       }
     })
