@@ -148,9 +148,17 @@ angular.module('starter', ['ionic'])
         ];
 
         $scope.submit = function(){
-          $('#input-name').blur();
-          $('#input-phone').blur();
-          $state.go('pay');
+          var field = document.createElement('input');
+          field.setAttribute('type', 'text');
+          document.body.appendChild(field);
+
+          setTimeout(function() {
+              field.focus();
+              setTimeout(function() {
+                  field.setAttribute('style', 'display:none;');
+                  $state.go('pay');
+              }, 50);
+          }, 50);
         }
       }
     })
@@ -159,9 +167,6 @@ angular.module('starter', ['ionic'])
       url: "/pay",
       templateUrl: "view/pay.html",
       controller: function($scope) {
-        $("#input-name").remove();
-        $("#input-phone").remove();
-        console.log(123);
       }
     })
 
