@@ -159,8 +159,9 @@ angular.module('starter', ['ionic'])
       url: "/pay",
       templateUrl: "view/pay.html",
       controller: function($scope) {
-        $("#input-name").blur();
-        $("#input-phone").blur();
+        $("#input-name").remove();
+        $("#input-phone").remove();
+        console.log(123);
       }
     })
 
