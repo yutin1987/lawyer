@@ -5,21 +5,61 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <title>呼叫律師</title>
 
-    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-
     <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
     <link href="css/ionic.app.css" rel="stylesheet">
     -->
-    <script type="text/javascript" src="./bower_components/jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 
-    <!-- ionic/angularjs js -->
-    <script src="lib/ionic/js/ionic.bundle.js"></script>
-
-    <!-- your app's js -->
-    <script src="js/app.js"></script>
+    <link href="css/style.css" rel="stylesheet">
+    <!-- <script src="js/app.js"></script> -->
   </head>
-  <body class="lawyer" ng-app="starter">
-    <div ui-view></div>
+  <body id="lawyer">
+
+    <div data-role="page" id="foo">
+
+      <div data-role="header" class="box--middle">
+        <img class="logo-mini" src="./img/logo-mini.png">
+      </div>
+
+      <div role="main" class="ui-content">
+      </div>
+
+      <a href="#bar" class="ui-btn ui-icon-arrow-r ui-btn-icon-right">
+        按此開始呼叫律師
+      </a>
+
+    </div>
+
+    <div data-role="page" id="bar">
+
+      <div data-role="header">
+        <h1>Bar</h1>
+      </div>
+
+      <div role="main" class="ui-content">
+        <label for="text-basic">Text input:</label>
+        <input type="text" name="text-basic" id="text-basic" value="">
+        <label for="text-basic">Text input:</label>
+        <input type="text" name="text-basic" id="text-basic" value="">
+        <label for="text-basic">Text input:</label>
+        <input type="text" name="text-basic" id="text-basic" value="">
+        <a class="ui-shadow ui-btn ui-corner-all" type="submit" href="#xzz">Submit</a>
+      </div>
+
+    </div>
+
+    <div data-role="page" id="xzz">
+
+      <div data-role="header">
+        <h1>Bar</h1>
+      </div>
+
+      <div role="main" class="ui-content">
+        123123
+      </div>
+
+    </div>
   </body>
 </html>

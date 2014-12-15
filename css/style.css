@@ -1,20 +1,52 @@
 @import url(http://fonts.googleapis.com/css?family=Lato:700);
 
-body {
-	background: #BAD7F0;
+/* body */
+body.ui-mobile-viewport,
+.ui-page.ui-page-theme-a {
+  background: #BAD7F0;
+	background-color: #BAD7F0;
 	background-image: url('../img/background.png');
 	background-size: 100%;
 }
 
-.bar.bar-header {
-	background: url('../img/header.png');
-	background-size: 100%;
-	text-align: center;
+/* page */
+.ui-page-theme-a .ui-header {
+  background: url('../img/header.png');
+  background-size: 100%;
+  text-align: center;
+  border: none;
+  height: 39px;
 }
 
-.logo_mini {
-	height: 70%;
-	margin: 0 auto;
+/* box--middle */
+.box--middle:after {
+  content: "";
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+
+.box--middle {
+  text-align: center;
+  white-space: nowrap;
+}
+
+.box--middle > * {
+  vertical-align: middle;
+}
+
+/* logo */
+.logo-mini {
+  max-height: 70%;
+}
+
+/* button */
+#lawyer .ui-page-theme-a .ui-btn {
+  background: rgba(255, 255, 255, 0.4);
+  border: none;
+  /*font-size: 20px;*/
+  color: #fffffe;
+  text-shadow: none;
 }
 
 .tip24 {
