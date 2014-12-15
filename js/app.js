@@ -148,9 +148,7 @@ angular.module('starter', ['ionic'])
         ];
 
         $scope.submit = function(){
-          setTimeout(function() {
-            $state.go('pay');
-          }, 500);
+          $state.go('pay');
         }
       }
     })
