@@ -34,17 +34,59 @@
 
     <div data-role="page" id="bar">
 
-      <div data-role="header">
-        <h1>Bar</h1>
+      <div data-role="header" class="box--middle">
+        <img class="logo-mini" src="./img/logo-mini.png">
       </div>
 
       <div role="main" class="ui-content">
-        <label for="text-basic">Text input:</label>
-        <input type="text" name="text-basic" id="text-basic" value="">
-        <label for="text-basic">Text input:</label>
-        <input type="text" name="text-basic" id="text-basic" value="">
-        <label for="text-basic">Text input:</label>
-        <input type="text" name="text-basic" id="text-basic" value="">
+
+        <div class="item">
+          <h2>目前所在警察局：{{select.police.name}}</h2>
+        </div>
+
+        <div class="map item item-image">
+          <img src="{{map}}">
+          <img class="landmark" src="./img/landmark.png">
+        </div>
+
+        <label class="item item-input item-select">
+          <div class="input-label">
+            縣市：
+          </div>
+          <select ng-model="select.city" ng-change="changeCity()" ng-options="item.id as item.name for item in city">
+          </select>
+        </label>
+
+        <label class="item item-input item-select">
+          <div class="input-label">
+            警察局：
+          </div>
+          <select ng-model="select.police" ng-change="changePolice()" ng-options="item.name group by item.unit for item in police">
+          </select>
+        </label>
+
+        <label for="city" class="select">縣市：</label>
+
+        <select name="city" id="city">
+            <option value="keelung">基隆</option>
+            <option value="taipei">台北</option>
+            <option value="taoyuan">桃園</option>
+            <option value="hsinchu">新竹</option>
+            <option value="miaoli">苗栗</option>
+            <option value="taichung">台中</option>
+            <option value="changhua">彰化</option>
+            <option value="yunlin">雲林</option>
+            <option value="chiayi">嘉義</option>
+            <option value="tainan">台南</option>
+            <option value="kaohsiung">高雄</option>
+            <option value="pingtung">屏東</option>
+            <option value="yilan">宜蘭</option>
+            <option value="hualien">花蓮</option>
+            <option value="taitung">台東</option>
+            <option value="nantou">南投</option>
+            <option value="penghu">澎湖</option>
+        </select>
+
         <a class="ui-shadow ui-btn ui-corner-all" type="submit" href="#xzz">Submit</a>
       </div>
 
