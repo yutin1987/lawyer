@@ -80,19 +80,84 @@
           </form>
         </label>
 
-        <a class="ui-shadow ui-btn ui-corner-all" type="submit" href="#xzz">下一步</a>
+        <a class="ui-shadow ui-btn ui-corner-all" type="submit" href="#form">下一步</a>
       </div>
 
     </div>
 
-    <div data-role="page" id="xzz">
+    <div data-role="page" id="form">
 
-      <div data-role="header">
-        <h1>Bar</h1>
+      <div data-role="header" class="box--middle">
+        <img class="logo-mini" src="./img/logo-mini.png">
       </div>
 
       <div role="main" class="ui-content">
-        123123
+        <label for="input-name">姓名：</label>
+        <input type="text" name="input-name" id="input-name" value="">
+
+        <label for="input-phone">手機：</label>
+        <input type="number" name="input-phone" id="input-phone" value="">
+
+        <fieldset data-role="controlgroup">
+          <legend>案件類型：</legend>
+          <input type="radio" name="radio-choice-1" id="radio-choice-1" value="choice-1" checked="checked">
+          <label for="radio-choice-1">毒品</label>
+          <input type="radio" name="radio-choice-1" id="radio-choice-2" value="choice-2">
+          <label for="radio-choice-2">交通</label>
+          <input type="radio" name="radio-choice-1" id="radio-choice-3" value="choice-3">
+          <label for="radio-choice-3">其他</label>
+        </fieldset>
+
+        <a class="ui-shadow ui-btn ui-corner-all" type="submit" href="#pay">下一步</a>
+      </div>
+
+    </div>
+
+    <div data-role="page" id="pay">
+
+      <div data-role="header" class="box--middle">
+        <img class="logo-mini" src="./img/logo-mini.png">
+      </div>
+
+      <div role="main" class="ui-content">
+        <div class="item">
+          <div class="wrap">
+            <h2>付款資訊</h2>
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="wrap">
+            <span>本服務以小時計費，收費標準參考<a>費用說明</a></span>
+          </div>
+        </div>
+
+        <div class="wrap">
+          <span class="time-start">PM18:00起</span>
+          <span class="time-end">PM12:00止</span>
+          <span class="price">5000</span>
+        </div>
+
+        <div class="wrap">
+          <span class="time-start">PM18:00起</span>
+          <span class="time-end">PM12:00止</span>
+          <span class="price">5000</span>
+        </div>
+
+        <div class="wrap">
+          <span class="time-start">PM18:00起</span>
+          <span class="time-end">PM12:00止</span>
+          <span class="price">5000</span>
+        </div>
+
+        <div class="item highlight">
+          <div class="wrap">
+            <span>預付兩小時訂金</span>
+            <label class="amount">$10000</label>
+          </div>
+        </div>
+
+        <a class="ui-shadow ui-btn ui-corner-all" type="submit" href="#asign">確定</a>
       </div>
 
     </div>
