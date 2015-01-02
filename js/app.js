@@ -1,186 +1,84 @@
-angular.module('starter', ['ionic'])
+$(function(){
+  var lat = 25.0439111;
+  var lng = 121.5097688;
+  var polices = [];
 
-.run(function($ionicPlatform) {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      function(position) {
+        lat = position.coords.latitude;
+        lng = position.coords.longitude;
 
-  $ionicPlatform.ready(function() {
-    if(window.cordova && window.cordova.plugins.Keyboard) {
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-    }
-    if(window.StatusBar) {
-      StatusBar.styleDefault();
-    }
+        console.log(lat, lng);
+
+        $.get('https://maps.googleapis.com/maps/api/geocode/json?language=en&latlng=' + lat + ',' + lng, function (res) {
+          var result = res.results;
+          var city = / *([\w]+) *city/gi.exec(result[0]['formatted_address']);
+          if (city) {
+            console.log(city[1].toLowerCase());
+            setCity(city[1].toLowerCase());
+          } else {
+            setCity('taipei');
+          }
+        });
+      }, function() {
+        alert('Failed!');
+      }
+    );
+  } else {
+    alert('No geolocation!');
+  }
+
+  function setCity(city) {
+    $.get('./data/' + city + '.json', function (res) {
+      res.forEach(function(police, index){
+        police.index = index;
+      });
+      polices = res.slice(0);
+
+      res.sort( function(a, b) {
+        var va = Math.abs(a.location.lat - lat) + Math.abs(a.location.lng - lng);
+        var vb = Math.abs(b.location.lat - lat) + Math.abs(b.location.lng - lng);
+        return va - vb;
+        }
+      );
+      
+      optgroup = [];
+
+      option_dom = [];
+      var max = (res.length > 5 ? 5 : res.length);
+      for (var i = 0; i < max; i++) {
+        police = res[i];
+        if (0===i) {
+          option_dom.push('<option selected="selected" value="'+police.index+'">'+police.name+'</option>');
+          setMap(police.location.lat, police.location.lng);
+        } else {
+          option_dom.push('<option value="'+police.index+'">'+police.name+'</option>');
+        }
+      }
+      optgroup.push('<optgroup label="附近">' + option_dom.join('') + '</optgroup>');
+
+      option_dom = [];
+      polices.forEach(function(police){
+        option_dom.push('<option value="'+police.index+'">'+police.name+'</option>');
+      });
+      optgroup.push('<optgroup label="警察局所">' + option_dom.join('') + '</optgroup>');
+
+      $('#police').html(optgroup.join('')).selectmenu('refresh');
+    });
+  }
+
+  $('#city').on('change', function(e){
+    setCity($(e.target).val());
   });
 
-  blur
+  $('#police').on('change', function(e){
+    police = polices[$(e.target).val()];
+    setMap(police.location.lat, police.location.lng);
+  });
 
-})
-
-.config(function($stateProvider, $urlRouterProvider) {
-
-  $urlRouterProvider.otherwise("/home");
-
-  $stateProvider
-    .state('home', {
-      url: "/home",
-      templateUrl: "view/home.html"
-    })
-
-    .state('location', {
-      url: "/location",
-      templateUrl: "view/location.html",
-      controller: function($scope) {
-
-        $scope.select = {
-          city: 'taipei',
-          police: {}
-        };
-
-        $scope.city = [
-          {id: 'keelung', name: '基隆'},
-          {id: 'taipei', name: '台北'},
-          {id: 'taoyuan', name: '桃園'},
-          {id: 'hsinchu', name: '新竹'},
-          {id: 'miaoli', name: '苗栗'},
-          {id: 'taichung', name: '台中'},
-          {id: 'changhua', name: '彰化'},
-          {id: 'yunlin', name: '雲林'},
-          {id: 'chiayi', name: '嘉義'},
-          {id: 'tainan', name: '台南'},
-          {id: 'kaohsiung', name: '高雄'},
-          {id: 'pingtung', name: '屏東'},
-          {id: 'yilan', name: '宜蘭'},
-          {id: 'hualien', name: '花蓮'},
-          {id: 'taitung', name: '台東'},
-          {id: 'nantou', name: '南投'},
-          {id: 'penghu', name: '澎湖'},
-        ];
-
-        $scope.police = [
-          {name: '尚未定位', unit: '警察局'}
-        ];
-
-        $scope.lat = 0;
-        $scope.lng = 0;
-
-        var getPolice = function (police) {
-          var lat = $scope.lat;
-          var lng = $scope.lng;
-          $.get('./data/' + $scope.select.city + '.json', function (res) {
-            res.sort( function(a, b) {
-              var va = Math.abs(a.location.lat - lat) + Math.abs(a.location.lng - lng);
-              var vb = Math.abs(b.location.lat - lat) + Math.abs(b.location.lng - lng);
-              return va - vb;
-              }
-            );
-
-            $scope.select.police = null;
-
-            if (police) {
-              for (var i = res.length - 1; i >= 0; i--) {
-                if (police.name === res[i].name) {
-                  $scope.select.police = res[i];
-                }
-              };
-            }
-
-            if (!$scope.select.police) {
-              $scope.select.police = res[0];
-            }
-
-            $scope.map = 'http://maps.googleapis.com/maps/api/staticmap?center='+$scope.select.police.location.lat+','+$scope.select.police.location.lng+'&language=zh-TW&zoom=16&size=640x640&maptype=roadmap&sensor=false';
-            for (var i = 0; i < 5; i++) {
-              res[i].unit = '附近局所';
-            }
-            for (var i = 5; i < res.length; i++) {
-              res[i].unit = '警察局';
-            }
-            $scope.police = res;
-            $scope.$apply();
-          });
-        };
-
-        $scope.changeCity = function () {
-          getPolice();
-        };
-
-        $scope.changePolice = function () {
-          getPolice($scope.select.police);
-        };
-
-        if(navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(
-            function(position) {
-              var x = $scope.lat = position.coords.latitude;
-              var y = $scope.lng = position.coords.longitude;
-              $scope.map = 'http://maps.googleapis.com/maps/api/staticmap?center='+x+','+y+'&language=zh-TW&zoom=16&size=640x640&maptype=roadmap&sensor=false';
-              $.get('https://maps.googleapis.com/maps/api/geocode/json?language=en&latlng=' + x + ',' + y, function (res) {
-                var result = res.results;
-                var city = / *([\w]+) *city/gi.exec(result[0]['formatted_address']);
-                if (city) {
-                  $scope.select.city = city[1].toLowerCase();
-                  getPolice();
-                }
-              });
-            }, function() {
-              alert('Failed!');
-            }
-          );
-        } else {
-          alert('No geolocation!');
-        }
-
-        $scope.other = function () {
-          $('#city').click();
-        };
-      }
-    })
-
-    .state('form', {
-      url: "/form",
-      templateUrl: "view/form.html",
-      controller: function($scope, $state) {
-        $scope.type = '其他';
-
-        $scope.types = [
-          '毒品',
-          '交通',
-          '其他'
-        ];
-
-        $scope.submit = function(){
-          $state.go('pay');
-        }
-      }
-    })
-
-    .state('pay', {
-      url: "/pay",
-      templateUrl: "view/pay.html",
-      controller: function($scope) {
-      }
-    })
-
-    .state('asign', {
-      url: "/asign",
-      templateUrl: "view/asign.html",
-      controller: function($scope, $timeout, $state) {
-        $scope.sec = 120;
-        var label;
-        (label = function () {
-          $scope.sec -= 1;
-          if ($scope.sec > 0) {
-            $timeout(label, 1000);
-          } else {
-            $state.go('contact');
-          }
-        })();
-      }
-    })
-
-    .state('contact', {
-      url: "/contact",
-      templateUrl: "view/contact.html",
-      controller: function($scope) {
-      }
-    });
+  function setMap(lat, lng) {
+    map = 'http://maps.googleapis.com/maps/api/staticmap?center='+lat+','+lng+'&language=zh-TW&zoom=16&size=640x640&maptype=roadmap&sensor=false';
+    $('#map').attr('src', map);
+  }
 });

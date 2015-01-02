@@ -49,6 +49,19 @@ body.ui-mobile-viewport,
   text-shadow: none;
 }
 
+
+.image {
+  display: block;
+  margin: 0 auto;
+}
+
+.image--full {
+  width: 100%;
+}
+
+
+/********************************/
+
 .tip24 {
 	text-align: center;
 	margin-top: 38px;

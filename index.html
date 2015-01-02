@@ -13,26 +13,28 @@
     <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 
     <link href="css/style.css" rel="stylesheet">
-    <!-- <script src="js/app.js"></script> -->
+    <script src="js/app.js"></script>
   </head>
   <body id="lawyer">
 
-    <div data-role="page" id="foo">
+    <div data-role="page" id="enter">
 
       <div data-role="header" class="box--middle">
         <img class="logo-mini" src="./img/logo-mini.png">
       </div>
 
       <div role="main" class="ui-content">
+        <img class="image" src="./img/logo.png" />
+        <img class="image" src="./img/24hr.png" />
       </div>
 
-      <a href="#bar" class="ui-btn ui-icon-arrow-r ui-btn-icon-right">
+      <a href="#loaction" class="ui-btn ui-icon-arrow-r ui-btn-icon-right">
         按此開始呼叫律師
       </a>
 
     </div>
 
-    <div data-role="page" id="bar">
+    <div data-role="page" id="loaction">
 
       <div data-role="header" class="box--middle">
         <img class="logo-mini" src="./img/logo-mini.png">
@@ -40,54 +42,45 @@
 
       <div role="main" class="ui-content">
 
-        <div class="item">
-          <h2>目前所在警察局：{{select.police.name}}</h2>
+        <div>
+          <h2>目前所在警察局：<span class=""></span></h2>
         </div>
 
-        <div class="map item item-image">
-          <img src="{{map}}">
+        <div>
+          <img class="image image--full" id="map" src="">
           <img class="landmark" src="./img/landmark.png">
         </div>
 
-        <label class="item item-input item-select">
-          <div class="input-label">
-            縣市：
-          </div>
-          <select ng-model="select.city" ng-change="changeCity()" ng-options="item.id as item.name for item in city">
-          </select>
+        <label>
+          <form>
+            <fieldset data-role="controlgroup" data-type="horizontal">
+                <legend>指定警察局:</legend>
+                <select name="city" id="city">
+                    <option value="keelung">基隆</option>
+                    <option value="taipei">台北</option>
+                    <option value="taoyuan">桃園</option>
+                    <option value="hsinchu">新竹</option>
+                    <option value="miaoli">苗栗</option>
+                    <option value="taichung">台中</option>
+                    <option value="changhua">彰化</option>
+                    <option value="yunlin">雲林</option>
+                    <option value="chiayi">嘉義</option>
+                    <option value="tainan">台南</option>
+                    <option value="kaohsiung">高雄</option>
+                    <option value="pingtung">屏東</option>
+                    <option value="yilan">宜蘭</option>
+                    <option value="hualien">花蓮</option>
+                    <option value="taitung">台東</option>
+                    <option value="nantou">南投</option>
+                    <option value="penghu">澎湖</option>
+                </select>
+                <select name="police" id="police">
+                </select>
+            </fieldset>
+          </form>
         </label>
 
-        <label class="item item-input item-select">
-          <div class="input-label">
-            警察局：
-          </div>
-          <select ng-model="select.police" ng-change="changePolice()" ng-options="item.name group by item.unit for item in police">
-          </select>
-        </label>
-
-        <label for="city" class="select">縣市：</label>
-
-        <select name="city" id="city">
-            <option value="keelung">基隆</option>
-            <option value="taipei">台北</option>
-            <option value="taoyuan">桃園</option>
-            <option value="hsinchu">新竹</option>
-            <option value="miaoli">苗栗</option>
-            <option value="taichung">台中</option>
-            <option value="changhua">彰化</option>
-            <option value="yunlin">雲林</option>
-            <option value="chiayi">嘉義</option>
-            <option value="tainan">台南</option>
-            <option value="kaohsiung">高雄</option>
-            <option value="pingtung">屏東</option>
-            <option value="yilan">宜蘭</option>
-            <option value="hualien">花蓮</option>
-            <option value="taitung">台東</option>
-            <option value="nantou">南投</option>
-            <option value="penghu">澎湖</option>
-        </select>
-
-        <a class="ui-shadow ui-btn ui-corner-all" type="submit" href="#xzz">Submit</a>
+        <a class="ui-shadow ui-btn ui-corner-all" type="submit" href="#xzz">下一步</a>
       </div>
 
     </div>
