@@ -203,8 +203,7 @@ svg.progress path {
   border: none;
 }
 
-.loading:after {
-  content: '';
+.loading .xxx {
   background: trasparent;
   width: 140%;
   height: 140%;
@@ -214,8 +213,8 @@ svg.progress path {
   left: -20%;
   opacity: 0.7;
   box-shadow: rgba(255, 255, 255, 0.6) -4px -5px 3px -3px;
-  transform: rotate(90deg);
-
+  animation-iteration-count: infinite;
+  -webkit-animation-iteration-count: infinite;
   /*animation: rotate 2s infinite linear;
   -webkit-animation: rotate 1s infinite linear;
      -moz-animation: rotate 1s infinite linear;
