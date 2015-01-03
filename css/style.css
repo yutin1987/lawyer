@@ -186,6 +186,8 @@ svg.progress path {
   stroke-dasharray: 628.31852px;
   animation: percent 10s infinite linear;
   -webkit-animation: percent 120s infinite linear;
+     -moz-animation: percent 120s infinite linear;
+      -ms-animation: percent 120s infinite linear;
 }
 
 .loading {
@@ -213,6 +215,8 @@ svg.progress path {
   box-shadow: rgba(255, 255, 255, 0.6) -4px -5px 3px -3px;
   animation: rotate 2s infinite linear;
   -webkit-animation: rotate 1s infinite linear;
+     -moz-animation: rotate 1s infinite linear;
+      -ms-animation: rotate 1s infinite linear;
 }
 
 .loading label {
@@ -237,19 +241,37 @@ svg.progress path {
 
 @-webkit-keyframes rotate {
   0% {
-    transform: rotateZ(0deg);
+    transform: rotate(0deg);
   }
   100% {
-    transform: rotateZ(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@-moz-keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@-ms-keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }
 
 @keyframes rotate {
   0% {
-    transform: rotateZ(0deg);
+    transform: rotate(0deg);
   }
   100% {
-    transform: rotateZ(360deg);
+    transform: rotate(360deg);
   }
 }
 
