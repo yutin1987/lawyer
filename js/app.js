@@ -26,7 +26,7 @@ $(function(){
           }
         });
       }, function() {
-        alert('Failed!');
+        setCity('taipei');
       }
     );
   } else {

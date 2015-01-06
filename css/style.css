@@ -9,6 +9,15 @@ body.ui-mobile-viewport,
 	background-size: 100%;
 }
 
+/* font */
+#lawyer .title,
+#lawyer label,
+#lawyer legend{
+  font-size: 17px;
+  text-shadow: none;
+  color: #596757;
+}
+
 /* page */
 .ui-page-theme-a .ui-header {
   background: url('../img/header.png');
@@ -128,6 +137,25 @@ body.ui-mobile-viewport,
   width: 42px;
   margin-top: -61px;
   margin-left: -20px;
+}
+
+/* price */
+.price {
+  padding: 15px;
+  background: rgba(220, 221, 221, 1);
+  text-shadow: none;
+}
+
+.price.price--star {
+  background: rgba(5, 180, 222, 1);
+}
+
+.price .price__money {
+  font-size: 55px;
+}
+
+.price .price__rule {
+  font-size: 14px;
 }
 
 /* image */
