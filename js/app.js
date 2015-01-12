@@ -1,7 +1,3 @@
-$(document).on('pagechange', function(e, data) {
-  console.log(e, data);
-});
-
 $(function(){
   var lat = 25.0439111;
   var lng = 121.5097688;
@@ -19,18 +15,14 @@ $(function(){
           var result = res.results;
           var city = / *([\w]+) *city/gi.exec(result[0]['formatted_address']);
           if (city) {
-            city = city[1].toLowerCase();
-            console.log(city);
-            city_select = $('#city');
-            $('option[value='+city+']', city_select).attr('selected', true);
-            city_select.selectmenu('refresh');
-            setCity(city);
+            console.log(city[1].toLowerCase());
+            setCity(city[1].toLowerCase());
           } else {
             setCity('taipei');
           }
         });
       }, function() {
-        setCity('taipei');
+        alert('Failed!');
       }
     );
   } else {
