@@ -82,6 +82,14 @@ body.ui-mobile-viewport,
   text-shadow: none;
 }
 
+#lawyer .ui-page-theme-a .ui-btn.ui-btn__inside {
+  max-width: 90px;
+  background: #DCDCDD;
+  color: #221814;
+  margin: 0 auto;
+  margin-top: 12px;
+}
+
 #lawyer .ui-page-theme-a .ui-radio input {
   margin: -11px 0 0 4px;
 }
@@ -201,6 +209,8 @@ body.ui-mobile-viewport,
   padding: 15px;
   background: rgba(220, 221, 221, 1);
   text-shadow: none;
+  position: relative;
+  min-height: 55px;
 }
 
 .price.price--star {
@@ -209,10 +219,15 @@ body.ui-mobile-viewport,
 
 .price .price__money {
   font-size: 55px;
+  position: absolute;
+  top: 15px;
+  right: 15px;
 }
 
 .price .price__rule {
   font-size: 14px;
+  line-height: 24px;
+  display: block;
 }
 
 /* image */
