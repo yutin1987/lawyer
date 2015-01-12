@@ -137,7 +137,7 @@ body.ui-mobile-viewport,
   border-radius: 100%;
 }
 
-.timer:after {
+.timer .xxx {
   content: "";
   background: trasparent;
   width: 140%;
