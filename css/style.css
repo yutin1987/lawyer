@@ -1,5 +1,24 @@
 @import url(http://fonts.googleapis.com/css?family=Lato:700);
 
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+    line-height: 1;
+}
+
 /* body */
 body.ui-mobile-viewport,
 .ui-page.ui-page-theme-a {
@@ -9,6 +28,15 @@ body.ui-mobile-viewport,
 	background-size: 100%;
 }
 
+/* font */
+#lawyer .title,
+#lawyer label,
+#lawyer legend{
+  font-size: 17px;
+  text-shadow: none;
+  color: #596757;
+}
+
 /* page */
 .ui-page-theme-a .ui-header {
   background: url('../img/header.png');
@@ -16,6 +44,11 @@ body.ui-mobile-viewport,
   text-align: center;
   border: none;
   height: 39px;
+}
+
+/* .ui-content */
+.ui-content.ui-content {
+  padding: 0;
 }
 
 /* box--middle */
@@ -49,8 +82,48 @@ body.ui-mobile-viewport,
   text-shadow: none;
 }
 
+#lawyer .ui-page-theme-a .ui-btn.ui-btn__inside {
+  max-width: 90px;
+  background: #DCDCDD;
+  color: #221814;
+  margin: 0 auto;
+  margin-top: 12px;
+}
+
 #lawyer .ui-page-theme-a .ui-radio input {
   margin: -11px 0 0 4px;
+}
+
+/* input */
+.ui-input {
+  padding: 6px 15px;
+  background: #EEEFEF;
+}
+.ui-input label {
+  margin-bottom: -6px;
+  color: #596757;
+}
+#lawyer .ui-input-text {
+  border-radius: 0px;
+}
+#lawyer input {
+  background: #DCDCDD;
+  border-radius: 0px;
+}
+#lawyer .ui-controlgroup {
+  background: #EEEFEF;
+  border-radius: 0px;
+  margin: 0;
+  padding: 0 15px;
+  padding-top: 12px;
+  padding-bottom: 6px;
+}
+#lawyer .ui-controlgroup .ui-radio{
+  background: #DCDCDD;
+}
+#lawyer#lawyer .ui-controlgroup label{
+  color: #596757;
+  font-weight: normal;
 }
 
 /* timer */
@@ -115,6 +188,7 @@ body.ui-mobile-viewport,
 .map {
   width: 100%;
   position: relative;
+  margin-bottom: -3px;
 }
 
 .map__image {
@@ -130,8 +204,66 @@ body.ui-mobile-viewport,
   margin-left: -20px;
 }
 
+/* price */
+.price {
+  padding: 15px;
+  background: rgba(220, 221, 221, 1);
+  text-shadow: none;
+  position: relative;
+  min-height: 55px;
+}
+
+.price.price--star {
+  background: rgba(5, 180, 222, 1);
+}
+
+.price .price__money {
+  font-size: 55px;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
+
+.price .price__rule {
+  font-size: 14px;
+  line-height: 24px;
+  display: block;
+}
+
 /* image */
 .image {
   display: block;
   margin: 0 auto;
+}
+
+/* select */
+.select {
+  position: relative;
+  background: #EEEFEF;
+}
+.select legend {
+  position: absolute;
+  line-height: 42px;
+  padding-left: 15px;
+}
+#lawyer .select .ui-btn {
+  background: none;
+}
+#lawyer .select .ui-select{
+  margin: 0;
+}
+#lawyer .select .ui-select span{
+  text-align: right;
+  color: #596757;
+  text-shadow: none;
+}
+
+/* title */
+h2.title {
+  line-height: 48px;
+  background: #EEEFEF;
+  color: #596757;
+  padding-left: 15px;
+  margin: 0;
+  font-weight: normal;
 }

@@ -1,3 +1,7 @@
+$(document).on('pagechange', function(e, data) {
+  console.log(e, data);
+});
+
 $(function(){
   var lat = 25.0439111;
   var lng = 121.5097688;
@@ -26,7 +30,7 @@ $(function(){
           }
         });
       }, function() {
-        alert('Failed!');
+        setCity('taipei');
       }
     );
   } else {
