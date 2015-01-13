@@ -64,7 +64,7 @@ body.ui-mobile-viewport,
   border-radius: 100%;
 }
 
-.timer:after {
+.timer .halo {
   background: trasparent;
   width: 140%;
   height: 140%;
