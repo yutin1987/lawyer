@@ -183,6 +183,19 @@ body.ui-mobile-viewport,
   }
 }
 
+#lawyer .timer .timer__number {
+  text-align: center;
+  font-size: 64px;
+  line-height: 148px;
+  vertical-align: middle;
+  margin-bottom: 0px;
+}
+
+.timer .timer__tip {
+  text-align: center;
+  box-shadow: none;
+}
+
 /* map */
 .map {
   width: 100%;
