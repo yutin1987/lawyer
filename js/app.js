@@ -4,6 +4,7 @@ var city = 'taipei';
 var polices = [];
 var page = 'enter';
 var alreadyLocation = false;
+var price = [5000, 5000, 5000];
 
 function setCity(city) {
   $.get('./data/' + city + '.json', function (res) {
@@ -57,11 +58,27 @@ function resertLocation() {
   setCity(city);
 }
 
+function getTimeRange() {
+  var date = new Date();
+  var hour = date.getHours();
+  var min = date.getMinutes();
+
+  var now = hour * 60 + min;
+
+  if (now >= 21 * 60 || now < 5 * 60) {
+    return 0;
+  } else if (now >= 5 * 60 & now < 13 * 60) {
+    return 1;
+  } else if (now >= 13 * 60 & now < 21 * 60) {
+    return 2;
+  }
+}
+
 /**
  * Page Change
  */
 $(document).on('pagechange', function(e, page) {
-  page = page.toPage[0].id;
+  page = page.toPage[0].id; 
 
   switch(page) {
     case 'enter':
@@ -85,6 +102,14 @@ $(document).on('pagechange', function(e, page) {
     case 'form':
       break;
     case 'pay':
+      var time = getTimeRange();
+      $('.priceRange').each(function(i){
+        if (i === time) {
+          $(this).addClass('price--star');
+        } else {
+          $(this).removeClass('price--star');
+        }
+      });
       break;
     case 'asign':
       break;
