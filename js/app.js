@@ -28,6 +28,7 @@ function setCity(city) {
       police = res[i];
       if (0===i) {
         option_dom.push('<option selected="selected" value="'+police.index+'">'+police.name+'</option>');
+        $('#target-police').text(police.name);
         setMap(police.location.lat, police.location.lng);
       } else {
         option_dom.push('<option value="'+police.index+'">'+police.name+'</option>');
@@ -96,6 +97,7 @@ $(document).on('pagechange', function(e, page) {
       $('#police').on('change', function(e){
         police = polices[$(e.target).val()];
         setMap(police.location.lat, police.location.lng);
+        $('#target-police').text(police.name);
       });
       break;
 
