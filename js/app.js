@@ -5,6 +5,8 @@ var polices = [];
 var page = 'enter';
 var alreadyLocation = false;
 var price = [5000, 5000, 5000];
+var waiter = null;
+var watting = 30;
 
 function setCity(city) {
   $.get('./data/' + city + '.json', function (res) {
@@ -84,6 +86,7 @@ $(document).on('pagechange', function(e, page) {
   switch(page) {
     case 'enter':
       break;
+
     case 'loaction':
       if (false === alreadyLocation) {
         alreadyLocation = true;
@@ -103,6 +106,7 @@ $(document).on('pagechange', function(e, page) {
 
     case 'form':
       break;
+
     case 'pay':
       var time = getTimeRange();
       $('.priceRange').each(function(i){
@@ -113,8 +117,21 @@ $(document).on('pagechange', function(e, page) {
         }
       });
       break;
+
     case 'asign':
+      (waiter = function() {
+        setTimeout(function(){
+          watting -= 1;
+          $('#timer').text(watting);
+          if (0 >= watting) {
+            location.href = '#contact';
+          } else {
+            waiter();
+          }
+        }, 1000);
+      })();
       break;
+
     case 'contact':
       break;
   }
