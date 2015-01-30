@@ -132,7 +132,12 @@ body.ui-mobile-viewport,
 }
 
 /* .ui-radio */
+.ui-radio .ui-btn.ui-radio-off {
+  border-width: 0;
+}
 .ui-radio .ui-btn.ui-radio-off:after {
+  opacity: 1;
+  filter: Alpha(Opacity=1);
   background-image: none;
   background-color: #fff;
   width: 8px;
