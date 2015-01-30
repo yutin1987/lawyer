@@ -143,7 +143,7 @@ body.ui-mobile-viewport,
 .ui-radio .ui-btn.ui-radio-off:after {
   width: 12px;
   height: 12px;
-  margin: -14px 2px 0 -2px;
+  margin: -12px 2px 0 2px;
 }
 
 .ui-radio .ui-btn.ui-radio-off:after {
