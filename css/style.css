@@ -139,13 +139,18 @@ body.ui-mobile-viewport,
 .ui-radio .ui-btn.ui-radio-off {
   border-width: 0;
 }
+.ui-radio .ui-btn.ui-radio-on:after, 
+.ui-radio .ui-btn.ui-radio-off:after {
+  width: 12px;
+  height: 12px;
+  margin: -14px 2px 0 -2px;
+}
+
 .ui-radio .ui-btn.ui-radio-off:after {
   opacity: 1;
   filter: Alpha(Opacity=1);
   background-image: none;
   background-color: #fff;
-  width: 8px;
-  height: 8px;
   border-width: 5px;
   border-style: solid; 
 }
