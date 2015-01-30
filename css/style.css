@@ -131,6 +131,16 @@ body.ui-mobile-viewport,
   font-weight: normal;
 }
 
+/* .ui-radio */
+.ui-radio .ui-btn.ui-radio-off:after {
+  background-image: none;
+  background-color: #fff;
+  width: 8px;
+  height: 8px;
+  border-width: 5px;
+  border-style: solid; 
+}
+
 /* timer */
 .timer {
   display: block;
