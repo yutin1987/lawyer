@@ -162,6 +162,7 @@ body.ui-mobile-viewport,
             transform-origin: center;
     -webkit-transform: rotate3d(0, 0, 1, 0deg);
             transform: rotate3d(0, 0, 1, 0deg);
+    -webkit-transform: rotate(0deg);
   }
   100% {
 
@@ -169,6 +170,7 @@ body.ui-mobile-viewport,
             transform-origin: center;
     -webkit-transform: rotate3d(0, 0, 1, 360deg);
             transform: rotate3d(0, 0, 1, 360deg);
+    -webkit-transform: rotate(360deg);
   }
 }
 
@@ -178,6 +180,7 @@ body.ui-mobile-viewport,
             transform-origin: center;
     -webkit-transform: rotate3d(0, 0, 1, 0deg);
             transform: rotate3d(0, 0, 1, 0deg);
+    -webkit-transform: rotate(0deg);
   }
   100% {
 
@@ -185,6 +188,7 @@ body.ui-mobile-viewport,
             transform-origin: center;
     -webkit-transform: rotate3d(0, 0, 1, 360deg);
             transform: rotate3d(0, 0, 1, 360deg);
+    -webkit-transform: rotate(360deg);
   }
 }
 
