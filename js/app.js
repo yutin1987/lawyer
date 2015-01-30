@@ -5,6 +5,7 @@ var polices = [];
 var page = 'enter';
 var alreadyLocation = false;
 var price = [5000, 5000, 5000];
+var timer = null;
 var waiter = null;
 var watting = 30;
 
@@ -81,7 +82,13 @@ function getTimeRange() {
  * Page Change
  */
 $(document).on('pagechange', function(e, page) {
-  page = page.toPage[0].id; 
+  page = page.toPage[0].id;
+
+  watting = 30;
+  if (timer) {
+    clearTimeout(timer);
+    timer = null;
+  }
 
   switch(page) {
     case 'enter':
@@ -120,7 +127,7 @@ $(document).on('pagechange', function(e, page) {
 
     case 'asign':
       (waiter = function() {
-        setTimeout(function(){
+        timer = setTimeout(function(){
           watting -= 1;
           $('#timer').text(watting);
           if (0 >= watting) {
