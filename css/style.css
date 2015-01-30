@@ -134,7 +134,7 @@ body.ui-mobile-viewport,
 /* .ui-radio */
 .ui-radio input{
   border: none;
-  background: none;
+  background: #E9E9EA;
 }
 .ui-radio .ui-btn.ui-radio-off {
   border-width: 0;
