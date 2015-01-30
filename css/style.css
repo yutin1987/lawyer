@@ -28,6 +28,11 @@ body.ui-mobile-viewport,
 	background-size: 100%;
 }
 
+.center {
+  text-align: center;
+  margin: 0 auto;
+}
+
 /* font */
 #lawyer .title,
 #lawyer label,
@@ -246,6 +251,8 @@ body.ui-mobile-viewport,
 .image {
   display: block;
   margin: 0 auto;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 
 /* select */
@@ -278,4 +285,34 @@ h2.title {
   padding-left: 15px;
   margin: 0;
   font-weight: normal;
+}
+
+/* photo */
+.photo {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.photo h2{
+  color: #FEFEFE;
+  text-shadow: none;
+}
+
+.photo img{
+  width: 240px;
+}
+
+/* tel */
+.tel {
+  text-decoration: none;
+}
+
+#lawyer .tel__number {
+  font-size: 46px;
+  color: #FFFFFE;
+  text-decoration: none;
+}
+
+.tel__btn {
+  width: 120px;
 }
