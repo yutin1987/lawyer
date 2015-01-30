@@ -132,6 +132,10 @@ body.ui-mobile-viewport,
 }
 
 /* .ui-radio */
+.ui-radio input{
+  border: none;
+  background: none;
+}
 .ui-radio .ui-btn.ui-radio-off {
   border-width: 0;
 }
