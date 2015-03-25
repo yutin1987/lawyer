@@ -145,7 +145,7 @@ $(document).on('pagechange', function(e, page) {
       .save({
         'naem': $('#input-name').val(),
         'phone': $('#input-phone').val(),
-        'location': $('#input-police').val(),
+        'location': police,
         'type': type
       });
 
