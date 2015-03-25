@@ -9,6 +9,11 @@ var timer = null;
 var waiter = null;
 var watting = 30;
 
+Parse.initialize(
+  'zJ4qLLQRZmw3SQASnWRov4Q1IUijIRyCT5PwKfnC',
+  'uJxPk1ZApuv1wHnInYnyQgfRjK65i34xknu3f1oK'
+);
+
 function setCity(city) {
   $.get('./data/' + city + '.json', function (res) {
     res.forEach(function(police, index){
@@ -45,7 +50,7 @@ function setCity(city) {
     });
     optgroup.push('<optgroup label="警察局所">' + option_dom.join('') + '</optgroup>');
 
-    $('#police').html(optgroup.join('')).selectmenu('refresh');
+    $('#input-police').html(optgroup.join('')).selectmenu('refresh');
   });
 }
 
@@ -104,7 +109,7 @@ $(document).on('pagechange', function(e, page) {
         setCity($(e.target).val());
       });
 
-      $('#police').on('change', function(e){
+      $('#input-police').on('change', function(e){
         police = polices[$(e.target).val()];
         setMap(police.location.lat, police.location.lng);
         $('#target-police').text(police.name);
@@ -126,6 +131,25 @@ $(document).on('pagechange', function(e, page) {
       break;
 
     case 'asign':
+      var type;
+      if ($('#input-type-1').val())
+        type = 'dope';
+      else if ($('#input-type-2').val())
+        type = 'traffic';
+      else if ($('#input-type-2').val())
+        type = 'other';
+
+      var Order = Parse.Object.extend("Order");
+      var order = new Order();
+      order
+      .save({
+        'naem': $('#input-name').val(),
+        'phone': $('#input-phone').val(),
+        'location': $('#input-police').val(),
+        'type': type
+      });
+
+      var waiter;
       (waiter = function() {
         timer = setTimeout(function(){
           watting -= 1;
