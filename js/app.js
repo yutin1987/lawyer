@@ -143,7 +143,7 @@ $(document).on('pagechange', function(e, page) {
       var order = new Order();
       order
       .save({
-        'naem': $('#input-name').val(),
+        'name': $('#input-name').val(),
         'phone': $('#input-phone').val(),
         'location': police,
         'type': type
