@@ -8,6 +8,7 @@ var price = [5000, 5000, 5000];
 var timer = null;
 var waiter = null;
 var watting = 30;
+var police = {};
 
 Parse.initialize(
   'zJ4qLLQRZmw3SQASnWRov4Q1IUijIRyCT5PwKfnC',
@@ -24,8 +25,8 @@ var orderId = null;
 
 function setCity(city) {
   $.get('./data/' + city + '.json', function (res) {
-    res.forEach(function(police, index){
-      police.index = index;
+    res.forEach(function(item, index){
+      item.index = index;
     });
     polices = res.slice(0);
 
@@ -41,20 +42,21 @@ function setCity(city) {
     option_dom = [];
     var max = (res.length > 5 ? 5 : res.length);
     for (var i = 0; i < max; i++) {
-      police = res[i];
+      item = res[i];
       if (0===i) {
-        option_dom.push('<option selected="selected" value="'+police.index+'">'+police.name+'</option>');
-        $('#target-police').text(police.name);
-        setMap(police.location.lat, police.location.lng);
+        police = item;
+        option_dom.push('<option selected="selected" value="'+item.index+'">'+police.name+'</option>');
+        $('#target-police').text(item.name);
+        setMap(item.location.lat, item.location.lng);
       } else {
-        option_dom.push('<option value="'+police.index+'">'+police.name+'</option>');
+        option_dom.push('<option value="'+item.index+'">'+item.name+'</option>');
       }
     }
     optgroup.push('<optgroup label="附近">' + option_dom.join('') + '</optgroup>');
 
     option_dom = [];
-    polices.forEach(function(police){
-      option_dom.push('<option value="'+police.index+'">'+police.name+'</option>');
+    polices.forEach(function(item){
+      option_dom.push('<option value="'+item.index+'">'+item.name+'</option>');
     });
     optgroup.push('<optgroup label="警察局所">' + option_dom.join('') + '</optgroup>');
 
@@ -125,6 +127,7 @@ $(document).on('pagechange', function(e, page) {
       break;
 
     case 'form':
+      console.log(police);
       break;
 
     case 'pay':
