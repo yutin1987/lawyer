@@ -14,6 +14,14 @@ Parse.initialize(
   'uJxPk1ZApuv1wHnInYnyQgfRjK65i34xknu3f1oK'
 );
 
+
+var Lawyer = Parse.Object.extend("User");
+var lawyer = new Lawyer();
+
+var Order = Parse.Object.extend("Order");
+var order = new Order();
+var orderId = null;
+
 function setCity(city) {
   $.get('./data/' + city + '.json', function (res) {
     res.forEach(function(police, index){
@@ -139,14 +147,18 @@ $(document).on('pagechange', function(e, page) {
       else if ($('#input-type-2').val())
         type = 'other';
 
-      var Order = Parse.Object.extend("Order");
-      var order = new Order();
       order
       .save({
         'name': $('#input-name').val(),
         'phone': $('#input-phone').val(),
         'location': police,
         'type': type
+      }, {
+        success: function(order) {
+          orderId = order.id;
+        },
+        error: function(order, error) {
+        }
       });
 
       var waiter;
@@ -154,8 +166,21 @@ $(document).on('pagechange', function(e, page) {
         timer = setTimeout(function(){
           watting -= 1;
           $('#timer').text(watting);
-          if (0 >= watting) {
-            location.href = '#contact';
+
+          if (watting % 5 === 0) {
+            order.get(orderId, {
+              success: function(order) {
+                if (order.get('lawyer')) {
+                  location.href = '?id=' + orderId + '#contact';
+                }
+              },
+              error: function(order, error) {
+              }
+            });
+          }
+
+          if (watting <= 0) {
+            location.href = '?id=' + orderId + '#contact';
           } else {
             waiter();
           }
@@ -164,6 +189,30 @@ $(document).on('pagechange', function(e, page) {
       break;
 
     case 'contact':
+      var regex = new RegExp("[\\?&]id=([^&#]*)");
+      var results = regex.exec(location.search);
+      if (results !== null) {
+        orderId = decodeURIComponent(results[1]);
+      }
+      
+      order.get(orderId, {
+        success: function(order) {
+          var lawyerId = order.get('lawyer');
+          if (lawyerId) {
+            lawyer.get(lawyerId, {
+              success: function(lawyer) {
+                $('#lawyer-name').text(lawyer.get('name'));
+                $('#lawyer-tel').text(lawyer.get('username'));
+              },
+              error: function(lawyer, error) {
+              }
+            });
+          }
+        },
+        error: function(order, error) {
+        }
+      });
+
       break;
   }
 });
