@@ -16,10 +16,10 @@ Parse.initialize(
 
 
 var Lawyer = Parse.Object.extend("User");
-var lawyer = new Lawyer();
+var lawyer = new Parse.Query(Lawyer);
 
 var Order = Parse.Object.extend("Order");
-var order = new Order();
+var order = new Parse.Query(Order);
 var orderId = null;
 
 function setCity(city) {
@@ -147,7 +147,7 @@ $(document).on('pagechange', function(e, page) {
       else if ($('#input-type-2').val())
         type = 'other';
 
-      order
+      new Order()
       .save({
         'name': $('#input-name').val(),
         'phone': $('#input-phone').val(),
@@ -192,7 +192,7 @@ $(document).on('pagechange', function(e, page) {
       var regex = new RegExp("[\\?&]id=([^&#]*)");
       var results = regex.exec(location.search);
       if (results !== null) {
-        orderId = decodeURIComponent(results[1]);
+        orderId = decodeURIComponent(results[1].replace('/',''));
       }
       
       order.get(orderId, {
@@ -210,6 +210,7 @@ $(document).on('pagechange', function(e, page) {
           }
         },
         error: function(order, error) {
+          console.log(error);
         }
       });
 
