@@ -143,11 +143,11 @@ $(document).on('pagechange', function(e, page) {
 
     case 'asign':
       var type;
-      if ($('#input-type-1').val())
+      if ($('#input-type-1').prop('checked'))
         type = 'dope';
-      else if ($('#input-type-2').val())
+      else if ($('#input-type-2').prop('checked'))
         type = 'traffic';
-      else if ($('#input-type-2').val())
+      else if ($('#input-type-2').prop('checked'))
         type = 'other';
 
       new Order()
