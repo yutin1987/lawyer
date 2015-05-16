@@ -147,7 +147,7 @@ $(document).on('pagechange', function(e, page) {
         type = 'dope';
       else if ($('#input-type-2').prop('checked'))
         type = 'traffic';
-      else if ($('#input-type-2').prop('checked'))
+      else
         type = 'other';
 
       new Order()
