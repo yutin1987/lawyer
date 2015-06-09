@@ -8,20 +8,25 @@ var price = [5000, 5000, 5000];
 var timer = null;
 var waiter = null;
 var watting = 30;
-var police = {};
 
 Parse.initialize(
   'zJ4qLLQRZmw3SQASnWRov4Q1IUijIRyCT5PwKfnC',
   'uJxPk1ZApuv1wHnInYnyQgfRjK65i34xknu3f1oK'
 );
 
+var storage = $.localStorage;
 
 var Lawyer = Parse.Object.extend("User");
 var lawyer = new Parse.Query(Lawyer);
 
 var Order = Parse.Object.extend("Order");
 var order = new Parse.Query(Order);
-var orderId = null;
+var orderId = storage.get('orderId') || null;
+
+var name = storage.get('name') || '';
+var phone = storage.get('phone') || '';
+
+var police = {};
 
 function setCity(city) {
   $.get('./data/' + city + '.json', function (res) {
@@ -93,6 +98,43 @@ function getTimeRange() {
   }
 }
 
+function getOrder(orderId, callback) {
+  order.get(orderId, {
+    success: function(order) {
+
+      var reply = {
+        'wait': order.get('wait'),
+        'lawyerId': order.get('lawyer'),
+        'closedAt': order.get('closedAt') ? new Date(order.get('closedAt')) : null,
+        'moneyOfClose': order.get('moneyOfClose'),
+        'cancelAt': order.get('cancelAt') ? new Date(order.get('cancelAt')) : null,
+        'causeOfCancel': order.get('causeOfCancel'),
+        'createdAt': new Date(order.get('createdAt'))
+      };
+
+      if (lawyerId && lawyerId != '9999999999') {
+        lawyer.get(lawyerId, {
+          success: function(lawyer) {
+            reply.lawyerName = lawyer.get('name');
+            reply.lawyerTel = lawyer.get('username');
+            reply.lawyerPhoto = lawyer.get('photo').url();
+            callback(null, reply);
+          },
+          error: function(lawyer, error) {
+            callback(error, reply);
+          }
+        });
+      } else {
+        callback(null, reply);
+      }
+    },
+    error: function(order, error) {
+      alert('單號' + orderId + '錯誤');
+      callback(error);
+    }
+  });
+}
+
 /**
  * Page Change
  */
@@ -127,10 +169,41 @@ $(document).on('pagechange', function(e, page) {
       break;
 
     case 'form':
-      console.log(police);
+      $('#input-name').val(name);
+      $('#input-phone').val(phone);
+
+      $('#go-to-pay').on('click', function(e) {
+        var checked = true;
+        if (!$('#input-name').val()) {
+          alert('警告！\n姓名為必要項目');
+          checked = false;
+        } else {
+          name = $('#input-name').val();
+          storage.set('name', name);
+        }
+
+        if (!$('#input-phone').val()) {
+          alert('警告！\n手機為必要項目');
+          checked = false;
+        } else if (!/^0[1-9][0-9]{8}/.test($('#input-phone').val())) {
+          alert('警告！\n手機必須是10個數字');
+          checked = false;
+        } else {
+          phone = $('#input-phone').val();
+          storage.set('phone', phone);
+        }
+
+        if (checked) {
+          location.href = '#pay';
+        }
+      });
       break;
 
     case 'pay':
+      if (!name || !phone) {
+        location.href = '#form';
+      }
+
       var time = getTimeRange();
       $('.priceRange').each(function(i){
         if (i === time) {
@@ -142,6 +215,10 @@ $(document).on('pagechange', function(e, page) {
       break;
 
     case 'asign':
+      if (!name || !phone) {
+        location.href = '#form';
+      }
+
       var type;
       if ($('#input-type-1').prop('checked'))
         type = 'dope';
@@ -152,15 +229,18 @@ $(document).on('pagechange', function(e, page) {
 
       new Order()
       .save({
-        'name': $('#input-name').val(),
-        'phone': $('#input-phone').val(),
+        'name': name,
+        'phone': phone,
         'location': police,
         'type': type
       }, {
         success: function(order) {
           orderId = order.id;
+          storage.set('orderId', orderId);
         },
         error: function(order, error) {
+          alert('建單失敗！');
+          location.href = '#form';
         }
       });
 
@@ -171,52 +251,59 @@ $(document).on('pagechange', function(e, page) {
           $('#timer').text(watting);
 
           if (watting % 5 === 0) {
-            order.get(orderId, {
-              success: function(order) {
-                if (order.get('lawyer')) {
-                  location.href = '?id=' + orderId + '#contact';
-                }
-              },
-              error: function(order, error) {
+            getOrder(orderId, function(err, reply) {
+              if (!err && reply.lawyerId) {
+                location.href = '#contact'; // '?id=' + orderId + 
               }
             });
           }
 
           if (watting <= 0) {
-            location.href = '?id=' + orderId + '#contact';
+            location.href = '#contact'; // '?id=' + orderId + 
           } else {
             waiter();
           }
         }, 1000);
       })();
+
+      $('#go-to-cancel').on('click', function() {
+        orderId = null;
+        storage.remove('orderId');
+        location.href = '#loaction';
+      });
       break;
 
     case 'contact':
-      var regex = new RegExp("[\\?&]id=([^&#]*)");
-      var results = regex.exec(location.search);
-      if (results !== null) {
-        orderId = decodeURIComponent(results[1].replace('/',''));
-      }
+      // var regex = new RegExp("[\\?&]id=([^&#]*)");
+      // var results = regex.exec(location.search);
+      // if (results !== null) {
+      //   orderId = decodeURIComponent(results[1].replace('/',''));
+      // }
       
-      order.get(orderId, {
-        success: function(order) {
-          var lawyerId = order.get('lawyer');
-          if (lawyerId) {
-            lawyer.get(lawyerId, {
-              success: function(lawyer) {
-                $('#lawyer-name').text(lawyer.get('name'));
-                $('#lawyer-tel').text(lawyer.get('username'));
-              },
-              error: function(lawyer, error) {
-              }
-            });
+      getOrder(orderId, function(err, reply) {
+        if (!err) {
+          if (reply.lawyerId != '9999999999') {
+            var tel = /^(0[0-9]{3})([0-9]{3})([0-9]{3})/gi.exec(reply.lawyerTel);
+            $('#lawyer-name').text(reply.lawyerName);
+            $('#lawyer-tel').attr('href', 'tel:' + lawyerTel);
+            $('#lawyer-tel label').text(tel[1] + '-' + tel[2] + '-' + tel[3]);
+            $('#lawyer-photo').attr('src', reply.lawyerPhoto);
+          } else {
+            $('#lawyer-name').text('沒有律師接單');
+            $('#lawyer-tel').attr('href', 'tel:0958328001');
+            $('#lawyer-tel label').text('0958-328-001');
+            $('#lawyer-photo').attr('src', './img/photo.jpg');
           }
-        },
-        error: function(order, error) {
-          console.log(error);
+        } else {
+          alert('查詢失敗');
         }
       });
 
+      $('#go-to-new').on('click', function() {
+        orderId = null;
+        storage.remove('orderId');
+        location.href = '#loaction';
+      });
       break;
   }
 });
@@ -246,5 +333,9 @@ $(function(){
     );
   } else {
     alert('No geolocation!');
+  }
+
+  if (orderId) {
+
   }
 });

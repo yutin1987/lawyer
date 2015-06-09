@@ -12,6 +12,7 @@
     <!-- <link rel="stylesheet" href="./css/animate.css" /> -->
     <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script src="./bower_components/jQuery-Storage-API/jquery.storageapi.min.js"></script>
     <script src="https://www.parsecdn.com/js/parse-1.4.2.min.js"></script>
 
     <link href="css/style.css" rel="stylesheet">
@@ -115,7 +116,7 @@
           <label for="input-type-3">其他</label>
         </fieldset>
 
-        <a class="ui-btn ui-btn__inside ui-icon-arrow-r ui-btn-icon-right" href="#pay">
+        <a class="ui-btn ui-btn__inside ui-icon-arrow-r ui-btn-icon-right" id="go-to-pay">
           下一步
         </a>
       </div>
@@ -174,7 +175,7 @@
           <div class="halo"></div>
         </div>
 
-        <a class="ui-btn ui-icon-arrow-l ui-btn-icon-left" href="#loaction">
+        <a class="ui-btn ui-icon-arrow-l ui-btn-icon-left" id="go-to-cancel">
           取消
         </a>
       </div>
@@ -189,19 +190,21 @@
 
       <div role="main" class="ui-content">
         <div class="padding center photo">
-          <img src="./img/photo.jpg">
+          <img id="lawyer-photo" src="./img/photo.jpg">
           <h2 id="lawyer-name">沒有律師接單</h2>
         </div>
 
         <div class="padding center">
-          <a class="tel" href="tel:0963066131">
-            <label id="lawyer-tel" class="tel__number">
-              0958-328-001
-            </label>
+          <a class="tel" id="lawyer-tel" href="tel:0958328001">
+            <label class="tel__number">0958-328-001</label>
             <img src="./img/tel.png" class="tel__btn">
           </a>
         </div>
       </div>
+
+      <a class="ui-btn ui-icon-arrow-r ui-btn-icon-right" id="go-to-new">
+        建立新訂單
+      </a>
 
     </div>
 
