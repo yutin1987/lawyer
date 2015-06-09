@@ -7,6 +7,7 @@ var alreadyLocation = false;
 var price = [5000, 5000, 5000];
 var timer = null;
 var waiter = null;
+var defWatting = 30;
 var watting = 30;
 
 Parse.initialize(
@@ -109,7 +110,7 @@ function getOrder(orderId, callback) {
         'moneyOfClose': order.get('moneyOfClose'),
         'cancelAt': order.get('cancelAt') ? new Date(order.get('cancelAt')) : null,
         'causeOfCancel': order.get('causeOfCancel'),
-        'createdAt': new Date(order.get('createdAt'))
+        'createdAt': new Date(order.createdAt)
       };
 
       if (reply.lawyerId && reply.lawyerId != '9999999999') {
@@ -141,7 +142,6 @@ function getOrder(orderId, callback) {
 $(document).on('pagechange', function(e, page) {
   page = page.toPage[0].id;
 
-  watting = 30;
   if (timer) {
     clearTimeout(timer);
     timer = null;
@@ -227,22 +227,27 @@ $(document).on('pagechange', function(e, page) {
       else
         type = 'other';
 
-      new Order()
-      .save({
-        'name': name,
-        'phone': phone,
-        'location': police,
-        'type': type
-      }, {
-        success: function(order) {
-          orderId = order.id;
-          storage.set('orderId', orderId);
-        },
-        error: function(order, error) {
-          alert('建單失敗！');
-          location.href = '#form';
-        }
-      });
+      if (!orderId) {
+        new Order()
+        .save({
+          'name': name,
+          'phone': phone,
+          'location': police,
+          'type': type
+        }, {
+          success: function(order) {
+            orderId = order.id;
+            storage.set('orderId', orderId);
+            watting = 30;
+          },
+          error: function(order, error) {
+            alert('建單失敗！');
+            location.href = '#form';
+          }
+        });
+      }
+
+      $('#timer').text(watting);
 
       var waiter;
       (waiter = function() {
@@ -282,8 +287,7 @@ $(document).on('pagechange', function(e, page) {
       
       getOrder(orderId, function(err, reply) {
         if (!err) {
-          console.log(reply);
-          if (reply.lawyerId != '9999999999') {
+          if (reply.lawyerId && reply.lawyerId != '9999999999') {
             var tel = /^(0[0-9]{3})([0-9]{3})([0-9]{3})/gi.exec(reply.lawyerTel);
             $('#lawyer-name').text(reply.lawyerName);
             $('#lawyer-tel').attr('href', 'tel:' + reply.lawyerTel);
@@ -337,6 +341,18 @@ $(function(){
   }
 
   if (orderId) {
-
+    getOrder(orderId, function(err, reply) {
+      if (!err) {
+        var time = Math.floor((new Date().getTime() - reply.createdAt.getTime()) / 1000);
+        if (time < defWatting) {
+          watting = defWatting - time;
+          location.href = '#asign';
+        } else {
+          location.href = '#contact';
+        }
+      } else {
+        alert('查詢失敗');
+      }
+    });
   }
 });
