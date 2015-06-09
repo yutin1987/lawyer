@@ -282,10 +282,11 @@ $(document).on('pagechange', function(e, page) {
       
       getOrder(orderId, function(err, reply) {
         if (!err) {
+          console.log(reply);
           if (reply.lawyerId != '9999999999') {
             var tel = /^(0[0-9]{3})([0-9]{3})([0-9]{3})/gi.exec(reply.lawyerTel);
             $('#lawyer-name').text(reply.lawyerName);
-            $('#lawyer-tel').attr('href', 'tel:' + lawyerTel);
+            $('#lawyer-tel').attr('href', 'tel:' + reply.lawyerTel);
             $('#lawyer-tel label').text(tel[1] + '-' + tel[2] + '-' + tel[3]);
             $('#lawyer-photo').attr('src', reply.lawyerPhoto);
           } else {
