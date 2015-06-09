@@ -112,8 +112,8 @@ function getOrder(orderId, callback) {
         'createdAt': new Date(order.get('createdAt'))
       };
 
-      if (lawyerId && lawyerId != '9999999999') {
-        lawyer.get(lawyerId, {
+      if (reply.lawyerId && reply.lawyerId != '9999999999') {
+        lawyer.get(reply.lawyerId, {
           success: function(lawyer) {
             reply.lawyerName = lawyer.get('name');
             reply.lawyerTel = lawyer.get('username');
