@@ -219,6 +219,29 @@ $(document).on('pagechange', function(e, page) {
         location.href = '#form';
       }
 
+      $('#timer').text(watting);
+
+      var waiter = function() {
+        timer = setTimeout(function(){
+          watting -= 1;
+          $('#timer').text(watting);
+
+          if (watting % 5 === 0) {
+            getOrder(orderId, function(err, reply) {
+              if (!err && reply.lawyerId) {
+                location.href = '#contact';
+              }
+            });
+          }
+
+          if (watting <= 0) {
+            location.href = '#contact';
+          } else {
+            waiter();
+          }
+        }, 1000);
+      };
+
       var type;
       if ($('#input-type-1').prop('checked'))
         type = 'dope';
@@ -238,38 +261,17 @@ $(document).on('pagechange', function(e, page) {
           success: function(order) {
             orderId = order.id;
             storage.set('orderId', orderId);
-            watting = 30;
+            watting = defWatting;
+            waiter();
           },
           error: function(order, error) {
             alert('建單失敗！');
             location.href = '#form';
           }
         });
+      } else {
+        waiter();
       }
-
-      $('#timer').text(watting);
-
-      var waiter;
-      (waiter = function() {
-        timer = setTimeout(function(){
-          watting -= 1;
-          $('#timer').text(watting);
-
-          if (watting % 5 === 0) {
-            getOrder(orderId, function(err, reply) {
-              if (!err && reply.lawyerId) {
-                location.href = '#contact'; // '?id=' + orderId + 
-              }
-            });
-          }
-
-          if (watting <= 0) {
-            location.href = '#contact'; // '?id=' + orderId + 
-          } else {
-            waiter();
-          }
-        }, 1000);
-      })();
 
       $('#go-to-cancel').on('click', function() {
         orderId = null;
@@ -307,6 +309,7 @@ $(document).on('pagechange', function(e, page) {
       $('#go-to-new').on('click', function() {
         orderId = null;
         storage.remove('orderId');
+        watting = defWatting;
         location.href = '#loaction';
       });
       break;
